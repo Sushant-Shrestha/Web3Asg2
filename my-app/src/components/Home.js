@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
+import { LeftDiv } from './StyledComponents';
 
 class Home extends React.Component {
 
@@ -10,13 +11,14 @@ class Home extends React.Component {
     render() {
         let imgUrl = "https://images.unsplash.com/photo-1547756536-cde3673fa2e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1411&q=80";
         return (
-            <div className="banner"
+            <LeftDiv className="banner"
                 style={{
                     backgroundImage: `url(${imgUrl})`,
                     height: '800px',
+                    width: "1920px",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
+                    backgroundRepeat: 'no-repeat'
                 }}>
                 <div
                     style={{
@@ -39,7 +41,7 @@ class Home extends React.Component {
                         </p>
                     </form>
                 </div>
-            </div>
+            </LeftDiv>
 
         );
     }
