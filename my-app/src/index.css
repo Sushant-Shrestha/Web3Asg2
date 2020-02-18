@@ -1,3 +1,16 @@
+:root {
+  --list-back: #2b7a78;
+  --favorites-back: #def2f1;
+  --details-back: #feffff;
+  --details-box-back: #def2f1;
+  --header-back: #17252A;
+  --button-back: #3aafa9;
+  --border-color: #c2dde6;
+  --list-box-back: #feffff;
+  --card-color: #ACD3B3;
+}
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,4 +23,35 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.banner {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+.banner div h1 {
+  font-size: 2rem;
+  text-shadow: 2px 2px black;
+}
+.banner div h3 {
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  text-shadow: 2px 2px black;
+}
+
+.banner div {
+  display: inline-block;
+  margin-top: 200px;
+}
+
+button {
+  margin: 0 0.5rem;
+  background: var(--button-back);
+  border: 0;
+  color: white;
+  padding: 10px;
+  border-radius:5px;
+  font-size: 1em;  
 }
