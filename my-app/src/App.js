@@ -14,7 +14,29 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      searchTerm: ""
+      searchTerm: "",
+      movieList: [],
+      isFetching: false
+    }
+  }
+  
+  async componentDidMount() {
+    let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
+    this.setState({ movieList: movies });
+    if (localStorage.getItem("movieList") === null) {
+      try {
+        let url = 'http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
+        console.log("hi");
+        if (this.state.movieList.length === 0) {
+          this.setState({ isFetching: true });
+          const response = await fetch(url);
+          const jsonData = await response.json();
+          this.setState({ movieList: jsonData, isFetching: false })
+          localStorage.setItem("movieList", JSON.stringify(jsonData));
+        }
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
