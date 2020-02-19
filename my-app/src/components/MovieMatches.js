@@ -8,13 +8,18 @@ export default class MovieMatches extends React.Component {
         return (
             <div style={{
                 display: 'grid',
-                gridTemplateColumns: 'auto auto auto',
+                gridTemplateColumns: '1fr 1fr 1fr',
                 overflow: 'auto',
                 height: '500px'
             }}>
-                <Column><Header>Title</Header></Column>
+                {/* <div style={{gridColumn: 'span 1'}}></div> */}
+                {/* <Column><Header>Title</Header></Column>
                 <Column><Header>Year</Header></Column>
-                <Column><Header>Rating</Header></Column>
+                <Column><Header>Rating</Header></Column> */}
+
+                <div style={{ gridColumn: 'span 1' }}>Title</div>
+                <div style={{ gridColumn: '2/3' }}>Year</div>
+                <div style={{ gridColumn: '3/4' }}>Rating</div>
 
                 {
                     this.props.movies.map((movie, index) => {
@@ -27,14 +32,16 @@ export default class MovieMatches extends React.Component {
 }
 
 function MovieRow(prop) {
-    let {props} = prop;
+    let { props } = prop;
     let img = "https://image.tmdb.org/t/p/w92/" + props.poster;
     // let year = props.release_date;
     return (
-        <div style={{ gridColumn: 'span 3', 
-        display: 'grid', 
-        gridTemplateColumns: 'auto auto auto' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
+        <div style={{
+            gridColumn: 'span 3',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+        }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridColumn: 'span 1' }}>
                 <Column><img src={img} title={props.title} alt={props.title} /></Column>
                 <Column>{props.title}</Column>
             </div>
@@ -48,8 +55,10 @@ function MovieRow(prop) {
 const Column = styled.div`
     display: flex;
     align-items: center;
-    grid-column: span 1;
+    justify-content: center;
+    text-align: center;
     align-self: center;
+    grid-column: span 1;
 `
 
 const Header = styled.div`
