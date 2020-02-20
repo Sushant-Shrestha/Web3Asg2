@@ -74,7 +74,7 @@ class App extends React.Component {
               <CSSTransition onEnter={this.animationStart} onEntered={this.animationComplete} timeout={{ enter: 200, exit: 100 }} key={location.key} classNames={'slide'}>
                 <Switch location={location}>
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
-                  <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
+                  <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
                   <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} />} />
                   <Route path='/cast' exact component={Cast} />

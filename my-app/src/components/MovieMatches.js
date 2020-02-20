@@ -9,7 +9,6 @@ export default class MovieMatches extends React.Component {
     
     render() {
 
-
         return (
             <div style={{
                 display: 'grid',
@@ -24,9 +23,13 @@ export default class MovieMatches extends React.Component {
                 <div style={{ gridColumn: '3/4' }}>Rating</div>
                 <ul style={{ gridColumn: 'span 4', listStyleType: 'none', padding: '0'}}>
                     {
+                        this.props.movies.length > 0 ? (
                         this.props.movies.map((movie, index) => {
                             return <MovieRow props={movie} key={index} addToFavourites={(this.addFav)} />
                         })
+                        ) : (
+                            <p>No movies found matching query!</p>
+                        )
                     }
                 </ul>
             </div>

@@ -17,6 +17,7 @@ class MovieList extends Component {
             hideFilter: false,
             filteredMovies: [],
             componentLoaded: false,
+            searchTerm: this.props.searchTerm,
             isFetching: true
         }
     }
@@ -28,6 +29,12 @@ class MovieList extends Component {
     componentDidUpdate(prevProps) {
         if (this.state.movieList.length === 0) {
             this.setState({movieList: this.props.movies});
+        }
+
+        if (this.state.searchTerm !== '') {
+            let list = cloneDeep(this.state.movieList);
+            let tempList = list.filter((m) => m.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()));
+            this.setState({ filteredMovies: tempList, searchTerm: '' });
         }
     }
 
@@ -61,8 +68,8 @@ class MovieList extends Component {
 
     titleChange = (searchTerm) => {
         let list = cloneDeep(this.state.movieList);
-        let tempList = list.filter((m) => m.title.toLowerCase().startsWith(searchTerm.toLowerCase()));
-        this.setState({ filteredMovies: tempList });
+        let tempList = list.filter((m) => m.title.toLowerCase().includes(searchTerm.toLowerCase()));
+        this.setState({ filteredMovies: tempList, searchTerm: searchTerm.toLowerCase() });
     }
 
     filterTrigger = (list) => {
@@ -79,7 +86,7 @@ class MovieList extends Component {
     // }
 
     resetFilters = () => {
-        this.setState({ filteredMovies: this.state.movieList })
+        this.setState({ filteredMovies: this.state.movieList, searchTerm: '' })
     }
 
     hideTheFilter = () => {
@@ -113,7 +120,7 @@ class MovieList extends Component {
                         {!this.props.anim ? (
                             <p>Rendering</p>
                         ) : (
-                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites}/>
+                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} />
                             )
 
                         }
