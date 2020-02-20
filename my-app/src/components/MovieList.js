@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { RightDiv } from './StyledComponents';
 import MovieMatches from './MovieMatches';
 import styled from 'styled-components';
+import Filter from './Filter';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 class MovieList extends Component {
     constructor(props) {
@@ -57,6 +59,25 @@ class MovieList extends Component {
         }
     }
 
+    titleChange = (searchTerm) => {
+        let list = cloneDeep(this.state.movieList);
+        let tempList = list.filter((m) => m.title.toLowerCase().startsWith(searchTerm.toLowerCase()));
+        this.setState({ filteredMovies: tempList });
+    }
+
+    filterTrigger = (list) => {
+        this.setState({ filteredMovies: list});
+    }
+
+    // searchMovieTerm = () => {
+    //     if (this.state.searchTerm !== "") {
+    //         let filtered = this.state.filteredMovies.filter(movie => {
+    //             return movie.title.match('/' + this.state.searchTerm + '/g');
+    //         });
+    //         this.setState({ filteredMovies: filtered })
+    //     }
+    // }
+
     resetFilters = () => {
         this.setState({ filteredMovies: this.state.movieList })
     }
@@ -98,6 +119,9 @@ class MovieList extends Component {
                         }
                         </MovList>
                     {/* <MovFilter props={this.state.hideFilter}> */}
+                        <MovFilter props={this.state.hideFilter}>
+                            {<Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>}
+                        </MovFilter>
                     {/* <MovieMatches /> */}
                     {/* </MovFilter> */}
                 </div>

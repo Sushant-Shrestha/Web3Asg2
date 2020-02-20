@@ -37,7 +37,9 @@ class Home extends React.Component {
                             <Link to='/MovieList'>
                                 <button>Show All Movies</button>
                             </Link>
-
+                            <Link to='/Filter'>
+                                <button>Filter</button>
+                            </Link>
                         </p>
                     </form>
                 </div>
