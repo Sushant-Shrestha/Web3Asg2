@@ -103,7 +103,9 @@ class MovieList extends Component {
 
                         }
                         </MovList>
-                    {<Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>}
+                        <MovFilter props={this.state.hideFilter}>
+                            {<Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>}
+                        </MovFilter>
                     {/* <MovieMatches /> */}
                     {/* </MovFilter> */}
                 </div>
