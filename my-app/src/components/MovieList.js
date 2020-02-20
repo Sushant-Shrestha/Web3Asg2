@@ -24,9 +24,6 @@ class MovieList extends Component {
         }
     }
 
-    // componentDidMount() {
-    //     this.setState({ movieList: this.props.movies, filteredMovies: this.props.movies })
-    // }
 
     async componentDidMount() {
         if (this.state.filteredMovies.length === 0) {
