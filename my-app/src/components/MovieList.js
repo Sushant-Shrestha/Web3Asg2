@@ -6,6 +6,8 @@ import MovieMatches from './MovieMatches';
 import styled from 'styled-components';
 import Filter from './Filter';
 import * as cloneDeep from 'lodash/cloneDeep';
+import FilterAnimation from '../animation/FilterAnimation';
+import MovieListAnimation from '../animation/MovieListAnimation';
 
 class MovieList extends Component {
     constructor(props) {
@@ -17,7 +19,8 @@ class MovieList extends Component {
             hideFilter: false,
             filteredMovies: [],
             componentLoaded: false,
-            isFetching: true
+            isFetching: true,
+            filterAnim: true
         }
     }
 
@@ -42,11 +45,13 @@ class MovieList extends Component {
                 }
             }
         }
+
+        this.setState({filterAnim: false});
     }
 
     titleChange = (searchTerm) => {
         let list = cloneDeep(this.state.movieList);
-        let tempList = list.filter((m) => m.title.toLowerCase().startsWith(searchTerm.toLowerCase()));
+        let tempList = list.filter((m) => m.title.toLowerCase().includes(searchTerm.toLowerCase()));
         this.setState({ filteredMovies: tempList });
     }
 
@@ -70,7 +75,11 @@ class MovieList extends Component {
     hideTheFilter = () => {
         let hide = this.state.hideFilter;
         let newHide = !hide;
+        setTimeout(() => {
+            this.setState({filterAnim: !hide})
+        }, 2000);        
         this.setState({ hideFilter: newHide });
+        
     }
 
     setFetching = () => {
@@ -96,14 +105,25 @@ class MovieList extends Component {
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
                     <MovList props={this.state.hideFilter}>
                         {!this.props.anim ? (
-                            <p>Rendering</p>
+                            <MovieListAnimation />
                         ) : (
                                 <MovieMatches movies={this.state.filteredMovies} />
                             )
 
                         }
                         </MovList>
-                    {<Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>}
+                    
+                    
+                    <MovFilter props={this.state.hideFilter}>
+                        {this.state.filterAnim ? (
+                            <FilterAnimation />
+                        ):(                            
+                        <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>
+                        )}
+                        
+                    </MovFilter>
+                    
+                    
                     {/* <MovieMatches /> */}
                     {/* </MovFilter> */}
                 </div>
@@ -115,15 +135,18 @@ class MovieList extends Component {
 
 const MovList = styled.div`
 grid-row: 1;
-background-color: green;
+background-color: #E27D60;
     grid-column: ${props => props.props ? "1 / 3" : "2 / 3"}
 `
 
 const MovFilter = styled.div`
     grid-row: 1;
-    background-color: cyan;
+    background-color: #E8A872;
     display: ${props => props.props ? "none" : ""};
     grid-column: 1/2;
+    legend {
+      text-color: red;  
+    }
 `
 
 const fullScreen = styled.div`

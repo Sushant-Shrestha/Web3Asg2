@@ -1,5 +1,6 @@
 import React from 'react';
 import * as cloneDeep from 'lodash/cloneDeep';
+import styled from 'styled-components';
 
 class Filter extends React.Component{
 
@@ -29,13 +30,13 @@ class Filter extends React.Component{
         return(
             <div >
                 <form className="filterForm">
-                    <legend>Filters</legend>
+                    <Legend><legend>Filters</legend></Legend>
 
-                    <label>Title</label><br/>
+                    <LabelTitle><label>Title</label></LabelTitle><br/>
                     <input type='text' name='title' onChange={this.titleFilter}/> <br/> <br/>
 
-                    <label>Year</label><br/>
-                    <input type='radio' id='before' name='year' value='before' checked={this.state.selectedYearOption === 'before'} onChange={this.handleOptionChange}/>
+                    <LabelTitle><label>Year</label></LabelTitle><br/>
+                    <Label><input type='radio' id='before' name='year' value='before' checked={this.state.selectedYearOption === 'before'} onChange={this.handleOptionChange}/>
                     <label htmlFor='before'>Before</label> <input type='text' name='beforeDate' ref={this.beforeDate}/> <br/>
 
                     <input type='radio' id='after' name='year' value='after' checked={this.state.selectedYearOption === 'after'} onChange={this.handleOptionChange}/>
@@ -43,10 +44,10 @@ class Filter extends React.Component{
 
                     <input type='radio' id='yearBetween' name='year' value='yearBetween' checked={this.state.selectedYearOption === 'yearBetween'} onChange={this.handleOptionChange}/>
                     <label htmlFor='yearBetween'>between</label> <input type='text' name='fromDate' ref={this.fromDate}/><br/>
-                    <input type='text' name='toDate' ref={this.toDate}/> <br/><br/>
+                    <input type='text' name='toDate' ref={this.toDate}/> <br/><br/></Label>
 
-                    <label>Rating</label><br/>
-                    <input type='radio' id='below' name='rating' value='below' checked={this.state.selectedRatingOption === 'below'} onChange={this.handleOptionChange}/>
+                    <LabelTitle><label>Rating</label></LabelTitle><br/>
+                    <Label><input type='radio' id='below' name='rating' value='below' checked={this.state.selectedRatingOption === 'below'} onChange={this.handleOptionChange}/>
                     <label htmlFor='below'>Below</label> <input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating}/> <br/>
 
                     <input type='radio' id='above' name='rating' value='above' checked={this.state.selectedRatingOption === 'above'} onChange={this.handleOptionChange}/>
@@ -54,13 +55,15 @@ class Filter extends React.Component{
 
                     <input type='radio' id='ratingBetween' name='rating' value='ratingBetween' checked={this.state.selectedRatingOption === 'ratingBetween'} onChange={this.handleOptionChange}/>
                     <label htmlFor='ratingBetween'>Between</label> <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating}/> <br/>
-                    <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating}/> <br/>
+                    <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating}/> <br/></Label>
                 </form>
 
                 <button onClick={this.filterTrigger}>Filter</button> <button onClick={this.props.resetFilters}>Clear</button>
             </div>
         );
     }
+
+    
 
     handleOptionChange = (e) => {
         if(e.target.name == 'year'){
@@ -147,5 +150,19 @@ class Filter extends React.Component{
     }
 
 }
+
+const Legend = styled.legend`
+    font-size: 1.5em
+            
+`;
+
+const LabelTitle = styled.label`
+    font-size: 1em;
+    font-weight: bold;
+`;
+
+const Label = styled.label`
+    font-size: 1em
+`;
 
 export default Filter;
