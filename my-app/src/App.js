@@ -16,19 +16,19 @@ class App extends React.Component {
     this.state = {
       searchTerm: "",
       movieList: [],
-      isFetching: false
+      isFetching: false,
+      animationComplete: true
     }
   }
   
   async componentDidMount() {
+    this.setState({ isFetching: true });
     let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
     this.setState({ movieList: movies });
     if (localStorage.getItem("movieList") === null) {
       try {
         let url = 'http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
-        console.log("hi");
         if (this.state.movieList.length === 0) {
-          this.setState({ isFetching: true });
           const response = await fetch(url);
           const jsonData = await response.json();
           this.setState({ movieList: jsonData, isFetching: false })
@@ -38,35 +38,47 @@ class App extends React.Component {
         console.error(error);
       }
     }
+    this.setState({ isFetching: true });
   }
 
   updateSearchTerm = (searchString) => {
     this.setState({ searchTerm: searchString });
   }
 
+  addToFavourites = (movie) => {
+  }
+
+  animationComplete = () => {
+    this.setState({ animationComplete: true })
+  }
+
+  animationStart = () => {
+    this.setState({ animationComplete: false })
+  }
+
   render() {
     return (
       <div className="App">
-      <Route render={({ location }) => {
-        return (
-          <TransitionGroup component={null}>
-            <CSSTransition timeout={{enter: 200, exit: 200}} key={location.key} classNames={'slide'}>
-              <Switch location={location}>
-                <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
-                <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
-                <Route path='/movie' exact component={Movie} />
-                <Route path='/movielist' exact component={MovieList} />
-                <Route path='/cast' exact component={Cast} />
-                <Route path='/about' exact component={About} />
-              </Switch>
-            </CSSTransition>
-          </TransitionGroup>
-        );
-      }}
-      />
+        <Route render={({ location }) => {
+          return (
+            <TransitionGroup component={null}>
+              <CSSTransition onEnter={this.animationStart} onEntered={this.animationComplete} timeout={{ enter: 200, exit: 100 }} key={location.key} classNames={'slide'}>
+                <Switch location={location}>
+                  <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
+                  <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
+                  <Route path='/movie' exact component={Movie} />
+                  <Route path='/movielist' exact render={(props) => <MovieList movies={this.state.movieList} addToFavourites={this.addToFavourites} searchTerm={this.state.searchTerm} anim={this.state.animationComplete}/>} />
+                  <Route path='/cast' exact component={Cast} />
+                  <Route path='/about' exact component={About} />
+                </Switch>
+              </CSSTransition>
+            </TransitionGroup>
+          );
+        }}
+        />
       </div>
     );
   }
 }
 
-  export default App;
+export default App;
