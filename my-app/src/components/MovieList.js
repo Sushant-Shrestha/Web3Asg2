@@ -23,6 +23,12 @@ class MovieList extends Component {
     //     this.setState({ movieList: this.props.movies, filteredMovies: this.props.movies })
     // }
 
+    componentDidUpdate(prevProps) {
+        if (this.state.movieList.length === 0) {
+            this.setState({movieList: this.props.movies});
+        }
+    }
+
     async componentDidMount() {
         if (this.state.filteredMovies.length === 0) {
             let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
@@ -86,7 +92,7 @@ class MovieList extends Component {
                         {!this.props.anim ? (
                             <p>Rendering</p>
                         ) : (
-                                <MovieMatches movies={this.state.filteredMovies} />
+                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites}/>
                             )
 
                         }

@@ -8,6 +8,7 @@ import Movie from './components/Movie';
 import Cast from './components/Cast';
 import About from './components/About';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 class App extends React.Component {
   constructor(props) {
@@ -17,7 +18,8 @@ class App extends React.Component {
       searchTerm: "",
       movieList: [],
       isFetching: false,
-      animationComplete: true
+      animationComplete: true,
+      favourites: []
     }
   }
 
@@ -47,6 +49,13 @@ class App extends React.Component {
   }
 
   addToFavourites = (movie) => {
+    const copyFavourites = cloneDeep(this.state.favourites);
+    const newFav = movie;
+    let isFound = this.state.favourites.find(fav => fav.id === newFav.id);
+    if (isFound === undefined) {
+      copyFavourites.push(newFav)
+      this.setState({ favourites: copyFavourites })
+    }
   }
 
   animationComplete = () => {
@@ -68,7 +77,7 @@ class App extends React.Component {
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList movies={this.state.movieList} addToFavourites={this.addToFavourites} searchTerm={this.state.searchTerm} anim={this.state.animationComplete}/>} />
+                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} />} />
                   <Route path='/cast' exact component={Cast} />
                   <Route path='/about' exact component={About} />
                 </Switch>
