@@ -55,3 +55,31 @@ button {
   border-radius:5px;
   font-size: 1em;  
 }
+
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  /* grid-auto-flow: column; */
+
+  align-items: center;
+  grid-gap: 5px;
+  background: var(--favorites-back);
+  color: var(--header-back);
+  padding: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+img.favoriteItem {
+  border-radius: 10px;
+}
+
+div {
+  border-radius: 10px;
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
+}

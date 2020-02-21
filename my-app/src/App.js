@@ -41,6 +41,18 @@ class App extends React.Component {
       }
     }
     this.setState({ isFetching: true });
+
+    let favs = JSON.parse(localStorage.getItem('favList') || '[]');
+    this.setState({ favourites: favs })
+
+    window.addEventListener('beforeunload', () => {
+      localStorage.setItem('favList', JSON.stringify(this.state.favourites));
+    })
+
+  }
+
+  componentWillUnmount() {
+      localStorage.setItem('favList', JSON.stringify(this.state.favourites));
   }
 
   updateSearchTerm = (searchString) => {
@@ -53,6 +65,15 @@ class App extends React.Component {
     let isFound = this.state.favourites.find(fav => fav.id === newFav.id);
     if (isFound === undefined) {
       copyFavourites.push(newFav)
+      this.setState({ favourites: copyFavourites })
+    }
+  }
+
+  removeFavourite = (movie) => {
+    const copyFavourites = cloneDeep(this.state.favourites);
+    let isFoundIndex = this.state.favourites.findIndex(fav => fav.id === movie.id);
+    copyFavourites.splice(isFoundIndex, 1);
+    if (isFoundIndex !== undefined) {
       this.setState({ favourites: copyFavourites })
     }
   }
@@ -76,7 +97,7 @@ class App extends React.Component {
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} />} />
+                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites}/>} />
                   <Route path='/cast' exact component={Cast} />
                   <Route path='/about' exact component={About} />
                 </Switch>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export default function MovieRow(prop) {
     let { props } = prop;
-    const test = (e, data) =>{
+    const clickHandler = (e, data) =>{
         prop.addToFavourites(data)
     }
     let img = "https://image.tmdb.org/t/p/w92/" + props.poster;
@@ -27,7 +27,7 @@ export default function MovieRow(prop) {
             <Column>
                 <div style={{ display: 'grid', gridGap: '10px' }}>
                     <button>View</button>
-                    <button onClick={(e) => test(e, props)}>❤</button>
+                    <button onClick={(e) => clickHandler(e, props)}>❤</button>
                 </div>
             </Column>
         </li>

@@ -8,6 +8,7 @@ import Filter from './Filter';
 import * as cloneDeep from 'lodash/cloneDeep';
 import FilterAnimation from '../animation/FilterAnimation';
 import MovieListAnimation from '../animation/MovieListAnimation';
+import Favourites from './Favourites';
 
 class MovieList extends Component {
     constructor(props) {
@@ -17,6 +18,7 @@ class MovieList extends Component {
         this.state = {
             movieList: [],
             hideFilter: false,
+            hideFav: false,
             filteredMovies: [],
             componentLoaded: false,
             searchTerm: this.props.searchTerm,
@@ -36,8 +38,9 @@ class MovieList extends Component {
             let tempList = list.filter((m) => m.title.toLowerCase().includes(this.state.searchTerm.toLowerCase()));
             this.setState({ filteredMovies: tempList, searchTerm: '' });
         }
-    }
 
+    }
+    
     async componentDidMount() {
         if (this.state.filteredMovies.length === 0) {
             let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
@@ -55,8 +58,13 @@ class MovieList extends Component {
                 }
             }
         }
-
+        
         this.setState({filterAnim: false});
+        if (this.state.hidefav === true && this.props.favs.length > 0) {
+            this.setState({ hideFav: false})
+        } else {
+            this.setState({ hideFav: true})
+        }
     }
 
     searchMovieTerm = () => {
@@ -105,13 +113,24 @@ class MovieList extends Component {
         this.setState({ isFetching: true })
     }
 
+    toggleFavouriteView = () => {
+        let fav = !this.state.hideFav;
+        console.log(fav)
+        this.setState({ hideFav: fav })
+    }
+
     render() {
         let imgUrl = "https://images.unsplash.com/photo-1510827220565-c6a086ff31c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
         return (
             <RightDiv ref={this.componentRef} style={{
                 height: '800px',
-                width: "1920px",
+                width: "1920px"
             }}>
+
+                <FavDiv props={this.state.hideFav}>
+                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite}/>
+                </FavDiv>
+
                 <button onClick={this.hideTheFilter}>True</button>
                 <HeaderMenu />
                 <Link to='/'>
@@ -121,6 +140,8 @@ class MovieList extends Component {
                 <Link to='/movie'>
                     <button>Select Movie</button>
                 </Link>
+
+                <button onClick={this.toggleFavouriteView}>Toggle Favourites</button>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
                     <MovList props={this.state.hideFilter}>
                         {!this.props.anim ? (
@@ -168,19 +189,9 @@ const MovFilter = styled.div`
     }
 `
 
-const fullScreen = styled.div`
-    grid-column: 1/3;
+const FavDiv = styled.div`
+    display: ${props => props.props ? "none" : ""};
 `
-
-const splitScreenMajority = styled.div`
-    grid-column: 2/3;
-`
-
-const splitScreenMinority = styled.div`
-    grid-column: 1/2;
-`
-
-
 
 
 export default MovieList;
