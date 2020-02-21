@@ -9,7 +9,6 @@ import Cast from './components/Cast';
 import About from './components/About';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as cloneDeep from 'lodash/cloneDeep';
-
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -19,7 +18,8 @@ class App extends React.Component {
       movieList: [],
       isFetching: false,
       animationComplete: true,
-      favourites: []
+      favourites: [],
+      modalIsOpen: false
     }
   }
 
@@ -52,7 +52,7 @@ class App extends React.Component {
   }
 
   componentWillUnmount() {
-      localStorage.setItem('favList', JSON.stringify(this.state.favourites));
+    localStorage.setItem('favList', JSON.stringify(this.state.favourites));
   }
 
   updateSearchTerm = (searchString) => {
@@ -86,9 +86,19 @@ class App extends React.Component {
     this.setState({ animationComplete: false })
   }
 
+  openModal = () => {
+    this.setState({ modalIsOpen: true })
+  }
+
+  closeModal = () => {
+    this.setState({ modalIsOpen: false })
+  }
+
   render() {
     return (
       <div className="App">
+        
+        <About isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
         <Route render={({ location }) => {
           return (
             <TransitionGroup component={null}>
@@ -97,9 +107,9 @@ class App extends React.Component {
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites}/>} />
+                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
                   <Route path='/cast' exact component={Cast} />
-                  <Route path='/about' exact component={About} />
+                  {/* <Route path='/about' exact component={About} /> */}
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

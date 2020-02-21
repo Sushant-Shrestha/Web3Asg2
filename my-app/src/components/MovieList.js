@@ -126,13 +126,13 @@ class MovieList extends Component {
                 height: '800px',
                 width: "1920px"
             }}>
+                <HeaderMenu openModal={this.props.openModal}/>
 
                 <FavDiv props={this.state.hideFav}>
                     <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite}/>
                 </FavDiv>
 
                 <button onClick={this.hideTheFilter}>True</button>
-                <HeaderMenu />
                 <Link to='/'>
                     <button onClick={this.setFetching}>Show All Movies</button>
                 </Link>
