@@ -76,10 +76,22 @@ img.favoriteItem {
 }
 
 div {
-  /* border-radius: 10px; */
+  border-radius: 10px;
   gap: 10px;
 }
 
 button {
   cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.padding {
+  padding: 10px;
+}
+
+.margin {
+  margin: 10px;
 }

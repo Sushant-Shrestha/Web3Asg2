@@ -12,13 +12,13 @@ export default function HeaderMenu(props) {
             
             <Btn>
                 <button onClick={props.hideTheFilter}>True</button>
-                <Link to='/'>
+                {/* <Link to='/'>
                     <button onClick={props.setFetching}>Show All Movies</button>
-                </Link>
+                </Link> */}
 
-                <Link to='/movie'>
+                {/* <Link to='/movie'>
                     <button>Select Movie</button>
-                </Link>
+                </Link> */}
 
                 <button onClick={props.toggleFavouriteView}>Toggle Favourites</button>
                 

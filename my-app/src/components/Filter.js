@@ -2,9 +2,9 @@ import React from 'react';
 import * as cloneDeep from 'lodash/cloneDeep';
 import styled from 'styled-components';
 
-class Filter extends React.Component{
+class Filter extends React.Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             filteredList: [],
@@ -24,106 +24,105 @@ class Filter extends React.Component{
         this.fromRating = React.createRef();
         this.toRating = React.createRef();
     }
-    
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <form className="filterForm" style={{display: 'flex', flexFlow: 'row wrap'}}>
+                <form className="filterForm" style={{ display: 'flex', flexFlow: 'row wrap' }}>
 
                     <div>
-                    <LabelTitle><label>Title</label></LabelTitle><br/>
-                    <input type='text' name='title' onChange={this.titleFilter}/> <br/> <br/>
+                        <LabelTitle><label>Title</label></LabelTitle><br />
+                        <input type='text' name='title' onChange={this.titleFilter} /> <br /> <br />
                     </div>
 
                     <div>
-                    <LabelTitle><label>Year</label></LabelTitle><br/>
-                    <Label><input type='radio' id='before' name='year' value='before' checked={this.state.selectedYearOption === 'before'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='before'>Before</label> 
+                        <LabelTitle><label>Year</label></LabelTitle><br />
+                        <Label><input type='radio' id='before' name='year' value='before' checked={this.state.selectedYearOption === 'before'} onChange={this.handleOptionChange} />
+                            <label htmlFor='before'>Before</label>
 
-                    <input type='radio' id='after' name='year' value='after' checked={this.state.selectedYearOption === 'after'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='after'>After</label> 
+                            <input type='radio' id='after' name='year' value='after' checked={this.state.selectedYearOption === 'after'} onChange={this.handleOptionChange} />
+                            <label htmlFor='after'>After</label>
 
-                    <input type='radio' id='yearBetween' name='year' value='yearBetween' checked={this.state.selectedYearOption === 'yearBetween'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='yearBetween'>between</label> <br/>
+                            <input type='radio' id='yearBetween' name='year' value='yearBetween' checked={this.state.selectedYearOption === 'yearBetween'} onChange={this.handleOptionChange} />
+                            <label htmlFor='yearBetween'>between</label> <br />
 
-                        <div>
-                            <input type='text' name='beforeDate' ref={this.beforeDate}/> <br/>
-                            <input type='text' name='afterDate' ref={this.afterDate}/> <br/>
-                            <input type='text' name='fromDate' ref={this.fromDate}/><br/>
-                            <input type='text' name='toDate' ref={this.toDate}/> <br/><br/>
-                        </div></Label>
+                            <div>
+                                <input type='text' name='beforeDate' ref={this.beforeDate} /> <br />
+                                <input type='text' name='afterDate' ref={this.afterDate} /> <br />
+                                <input type='text' name='fromDate' ref={this.fromDate} /><br />
+                                <input type='text' name='toDate' ref={this.toDate} /> <br /><br />
+                            </div></Label>
                     </div>
 
                     <div>
-                    <LabelTitle><label>Rating</label></LabelTitle><br/>
-                    <Label><input type='radio' id='below' name='rating' value='below' checked={this.state.selectedRatingOption === 'below'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='below'>Below</label> 
+                        <LabelTitle><label>Rating</label></LabelTitle><br />
+                        <Label><input type='radio' id='below' name='rating' value='below' checked={this.state.selectedRatingOption === 'below'} onChange={this.handleOptionChange} />
+                            <label htmlFor='below'>Below</label>
 
-                    <input type='radio' id='above' name='rating' value='above' checked={this.state.selectedRatingOption === 'above'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='above'>Above</label> 
+                            <input type='radio' id='above' name='rating' value='above' checked={this.state.selectedRatingOption === 'above'} onChange={this.handleOptionChange} />
+                            <label htmlFor='above'>Above</label>
 
-                    <input type='radio' id='ratingBetween' name='rating' value='ratingBetween' checked={this.state.selectedRatingOption === 'ratingBetween'} onChange={this.handleOptionChange}/>
-                    <label htmlFor='ratingBetween'>Between</label> <br/>
+                            <input type='radio' id='ratingBetween' name='rating' value='ratingBetween' checked={this.state.selectedRatingOption === 'ratingBetween'} onChange={this.handleOptionChange} />
+                            <label htmlFor='ratingBetween'>Between</label> <br />
 
-                    <input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating}/> <br/>
-                    <input type='range' name='aboveRating' min='0' max='10' defaultValue='5' ref={this.aboveRating}/> <br/>
-                    <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating}/> <br/>
-                    <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating}/> <br/></Label>
+                            <input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating} /> <br />
+                            <input type='range' name='aboveRating' min='0' max='10' defaultValue='5' ref={this.aboveRating} /> <br />
+                            <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating} /> <br />
+                            <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating} /> <br /></Label>
 
                     </div>
 
-                    <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
-                    <button onClick={this.filterTrigger}>Filter</button> 
-                    <button onClick={this.props.resetFilters}>Clear</button>
-                </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }}>
+                        <button onClick={this.filterTrigger}>Filter</button>
+                        <button onClick={this.props.resetFilters}>Clear</button>
+                    </div>
                 </form>
 
-                
+
             </div>
         );
     }
 
-    
+
 
     handleOptionChange = (e) => {
-        if(e.target.name == 'year'){
-            this.setState({selectedYearOption: e.target.value});
-        } else if(e.target.name == 'rating'){
-            this.setState({selectedRatingOption: e.target.value});
+        if (e.target.name == 'year') {
+            this.setState({ selectedYearOption: e.target.value });
+        } else if (e.target.name == 'rating') {
+            this.setState({ selectedRatingOption: e.target.value });
         }
     }
 
     titleFilter = (e) => {
-       
+
         this.props.titleChange(e.target.value);
     }
 
     filterTrigger = () => {
         //console.dir(this.state.filteredList);
         let list = cloneDeep(this.props.filteredList);
-       
-        if(this.state.selectedYearOption != ''){
+
+        if (this.state.selectedYearOption != '') {
             let tempList = [];
-            
-            if(this.state.selectedYearOption == 'before'){
-                
+
+            if (this.state.selectedYearOption == 'before') {
+
                 list.forEach((f) => {
-                    if(f.release_date.split('-')[0] <= this.beforeDate.current.value){
+                    if (f.release_date.split('-')[0] <= this.beforeDate.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if(this.state.selectedYearOption == 'after'){
-                
+            } else if (this.state.selectedYearOption == 'after') {
+
                 list.forEach((f) => {
-                    if(f.release_date.split('-')[0] >= this.afterDate.current.value){
+                    if (f.release_date.split('-')[0] >= this.afterDate.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if(this.state.selectedYearOption == 'yearBetween'){
-                
+            } else if (this.state.selectedYearOption == 'yearBetween') {
+
                 list.forEach((f) => {
-                    if((f.release_date.split('-')[0] >= this.fromDate.current.value) && (f.release_date.split('-')[0] <= this.toDate.current.value)){
+                    if ((f.release_date.split('-')[0] >= this.fromDate.current.value) && (f.release_date.split('-')[0] <= this.toDate.current.value)) {
                         tempList.push(f);
                     }
                 });
@@ -134,27 +133,27 @@ class Filter extends React.Component{
             list = cloneDeep(tempList);
         }
 
-        if(this.state.selectedRatingOption != ''){
+        if (this.state.selectedRatingOption != '') {
             let tempList = [];
 
-            if(this.state.selectedRatingOption == 'below'){
-                
+            if (this.state.selectedRatingOption == 'below') {
+
                 list.forEach((f) => {
-                    if(f.ratings.average <= this.belowRating.current.value){
+                    if (f.ratings.average <= this.belowRating.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if(this.state.selectedRatingOption == 'above'){
-                
+            } else if (this.state.selectedRatingOption == 'above') {
+
                 list.forEach((f) => {
-                    if(f.ratings.average >= this.aboveRating.current.value){
+                    if (f.ratings.average >= this.aboveRating.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if(this.state.selectedRatingOption == 'ratingBetween'){
+            } else if (this.state.selectedRatingOption == 'ratingBetween') {
                 //console.log(this.fromRating.current.value + " " + this.toRating.current.value);
                 list.forEach((f) => {
-                    if((f.ratings.average >= this.fromRating.current.value) && (f.ratings.average <= this.toRating.current.value)){
+                    if ((f.ratings.average >= this.fromRating.current.value) && (f.ratings.average <= this.toRating.current.value)) {
                         tempList.push(f);
                     }
                 });
@@ -167,7 +166,7 @@ class Filter extends React.Component{
     }
 
     clear = () => {
-        this.setState({filteredList: this.props.movieList});
+        this.setState({ filteredList: this.props.movieList });
     }
 
 }
