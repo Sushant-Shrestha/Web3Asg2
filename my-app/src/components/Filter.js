@@ -173,7 +173,6 @@ class Filter extends React.Component{
 }
 
 
-
 const LabelTitle = styled.label`
     font-size: 1em;
     font-weight: bold;

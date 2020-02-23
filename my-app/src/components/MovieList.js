@@ -155,11 +155,57 @@ class MovieList extends Component {
                     </MovList>
                 {/* </div> */}
 
+                <button onClick={this.toggleFavouriteView}>Toggle Favourites</button>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
+                    <MovList props={this.state.hideFilter}>
+                        {!this.props.anim ? (
+                            <MovieListAnimation />
+                        ) : (
+                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} />
+                            )
+
+                        }
+                        </MovList>
+                    
+                    
+                    <MovFilter props={this.state.hideFilter}>
+                        {this.state.filterAnim ? (
+                            <FilterAnimation />
+                        ):(                            
+                        <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>
+                        )}
+                        
+                    </MovFilter>
+                    
+                    
+                    {/* <MovieMatches /> */}
+                    {/* </MovFilter> */}
+                </div>
+
             </RightDiv>
         )
     }
 }
 
+const MovList = styled.div`
+grid-row: 1;
+background-color: #E27D60;
+    grid-column: ${props => props.props ? "1 / 3" : "2 / 3"}
+`
+
+const MovFilter = styled.div`
+    grid-row: 1;
+    background-color: #E8A872;
+    display: ${props => props.props ? "none" : ""};
+    grid-column: 1/2;
+    legend {
+      text-color: red;  
+    }
+`
+
+const FavDiv = styled.div`
+    display: ${props => props.props ? "none" : ""};
+`
 
 const MovList = styled.div`
 
