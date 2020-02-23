@@ -4,7 +4,7 @@
   --details-back: #feffff;
   --details-box-back: #def2f1;
   --header-back: #17252A;
-  --button-back: #3aafa9;
+  --button-back: #ffffff;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
   --card-color: #ACD3B3;
@@ -50,8 +50,36 @@ button {
   margin: 0 0.5rem;
   background: var(--button-back);
   border: 0;
-  color: white;
+  color: #595959;
   padding: 10px;
-  border-radius:5px;
+  /* border-radius:5px; */
   font-size: 1em;  
+}
+
+.favorites {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  /* grid-auto-flow: column; */
+
+  align-items: center;
+  grid-gap: 5px;
+  background: var(--favorites-back);
+  color: var(--header-back);
+  padding: 5px;
+  font-size: 0.8em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+img.favoriteItem {
+  /* border-radius: 10px; */
+}
+
+div {
+  /* border-radius: 10px; */
+  gap: 10px;
+}
+
+button {
+  cursor: pointer;
 }

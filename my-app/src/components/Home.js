@@ -37,7 +37,6 @@ class Home extends React.Component {
                             <Link to='/MovieList'>
                                 <button>Show All Movies</button>
                             </Link>
-
                         </p>
                     </form>
                 </div>
