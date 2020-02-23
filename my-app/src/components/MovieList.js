@@ -9,6 +9,7 @@ import * as cloneDeep from 'lodash/cloneDeep';
 import FilterAnimation from '../animation/FilterAnimation';
 import MovieListAnimation from '../animation/MovieListAnimation';
 import Favourites from './Favourites';
+import MovieDetails from './MovieDetails';
 
 class MovieList extends Component {
     constructor(props) {
@@ -23,14 +24,16 @@ class MovieList extends Component {
             componentLoaded: false,
             searchTerm: this.props.searchTerm,
             isFetching: true,
-            filterAnim: true
+            filterAnim: true,
+            isViewing: false,
+            movieID: null
         }
     }
 
 
     componentDidUpdate(prevProps) {
         if (this.state.movieList.length === 0) {
-            this.setState({movieList: this.props.movies});
+            this.setState({ movieList: this.props.movies });
         }
 
         if (this.state.searchTerm !== '') {
@@ -40,7 +43,7 @@ class MovieList extends Component {
         }
 
     }
-    
+
     async componentDidMount() {
         if (this.state.filteredMovies.length === 0) {
             let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
@@ -58,12 +61,12 @@ class MovieList extends Component {
                 }
             }
         }
-        
-        this.setState({filterAnim: false});
+
+        this.setState({ filterAnim: false });
         if (this.state.hidefav === true && this.props.favs.length > 0) {
-            this.setState({ hideFav: false})
+            this.setState({ hideFav: false })
         } else {
-            this.setState({ hideFav: true})
+            this.setState({ hideFav: true })
         }
     }
 
@@ -83,7 +86,7 @@ class MovieList extends Component {
     }
 
     filterTrigger = (list) => {
-        this.setState({ filteredMovies: list});
+        this.setState({ filteredMovies: list });
     }
 
     // searchMovieTerm = () => {
@@ -103,10 +106,10 @@ class MovieList extends Component {
         let hide = this.state.hideFilter;
         let newHide = !hide;
         setTimeout(() => {
-            this.setState({filterAnim: !hide})
-        }, 2000);        
+            this.setState({ filterAnim: !hide })
+        }, 2000);
         this.setState({ hideFilter: newHide });
-        
+
     }
 
     setFetching = () => {
@@ -119,6 +122,19 @@ class MovieList extends Component {
         this.setState({ hideFav: fav })
     }
 
+    setViewing = (movie) => {
+        this.setState({ isViewing: true });
+        this.setState({ movieID: movie });
+        // console.log({this.state.viewedMovie});
+    }
+
+    closeView = () => {
+        this.setState({ isViewing: false });
+        this.setState({ movieID: null });
+    }
+
+
+
     render() {
         let imgUrl = "https://images.unsplash.com/photo-1510827220565-c6a086ff31c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
         return (
@@ -126,10 +142,10 @@ class MovieList extends Component {
                 height: '800px',
                 width: "1920px"
             }}>
-                <HeaderMenu openModal={this.props.openModal}/>
+                <HeaderMenu openModal={this.props.openModal} />
 
                 <FavDiv props={this.state.hideFav}>
-                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite}/>
+                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} />
                 </FavDiv>
 
                 <button onClick={this.hideTheFilter}>True</button>
@@ -141,32 +157,41 @@ class MovieList extends Component {
                     <button>Select Movie</button>
                 </Link>
 
+                {/* TEST HERE */}
                 <button onClick={this.toggleFavouriteView}>Toggle Favourites</button>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
+                <div> {this.state.isViewing ? (<div>
+                    {/* <button onClick={this.closeView}>close view</button> */}
+                    <MovieDetails closeView={this.closeView} id={this.state.movieID}/>
+                </div>)
+                    : (<div> <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
                     <MovList props={this.state.hideFilter}>
                         {!this.props.anim ? (
                             <MovieListAnimation />
                         ) : (
-                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} />
+                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm}
+                                    setViewing={this.setViewing} movieViewed={this.setViewedMovie} />
                             )
 
                         }
-                        </MovList>
-                    
-                    
+                    </MovList>
+
+
                     <MovFilter props={this.state.hideFilter}>
                         {this.state.filterAnim ? (
                             <FilterAnimation />
-                        ):(                            
-                        <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters}/>
-                        )}
-                        
+                        ) : (
+                                <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters} />
+                            )}
+
                     </MovFilter>
-                    
-                    
+
+
                     {/* <MovieMatches /> */}
                     {/* </MovFilter> */}
-                </div>
+                </div>  </div>)}</div>
+
+
+               
 
             </RightDiv>
         )

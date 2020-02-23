@@ -6,6 +6,14 @@ export default class MovieMatches extends React.Component {
     addFav = (e) => {
         this.props.addToFavourites(e)
     }
+
+    setViewing = (mov) => {
+        this.props.setViewing(mov);
+    }
+
+    // setViewedMovie = () =>{
+    //     this.props.movieViewed =
+    // }
     
     render() {
 
@@ -25,7 +33,7 @@ export default class MovieMatches extends React.Component {
                     {
                         this.props.movies.length > 0 ? (
                         this.props.movies.map((movie, index) => {
-                            return <MovieRow props={movie} key={index} addToFavourites={(this.addFav)} />
+                            return <MovieRow props={movie} key={index} addToFavourites={(this.addFav)} setViewing={this.setViewing}/>
                         })
                         ) : (
                             <p>No movies found matching query!</p>
