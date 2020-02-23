@@ -122,36 +122,17 @@ class MovieList extends Component {
     render() {
         let imgUrl = "https://images.unsplash.com/photo-1510827220565-c6a086ff31c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
         return (
-            <RightDiv ref={this.componentRef} style={{
-                height: '800px',
-                width: "1920px"
-            }}>
-                <HeaderMenu openModal={this.props.openModal}/>
+            <RightDiv ref={this.componentRef} style={{height: '900px', width: '100%' }}>
+                <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView}/>
 
                 <FavDiv props={this.state.hideFav}>
                     <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite}/>
                 </FavDiv>
 
-                <button onClick={this.hideTheFilter}>True</button>
-                <Link to='/'>
-                    <button onClick={this.setFetching}>Show All Movies</button>
-                </Link>
+                
 
-                <Link to='/movie'>
-                    <button>Select Movie</button>
-                </Link>
-
-                <button onClick={this.toggleFavouriteView}>Toggle Favourites</button>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr' }}>
-                    <MovList props={this.state.hideFilter}>
-                        {!this.props.anim ? (
-                            <MovieListAnimation />
-                        ) : (
-                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} />
-                            )
-
-                        }
-                        </MovList>
+                {/* <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr'}}> */}
+                    
                     
                     
                     <MovFilter props={this.state.hideFilter}>
@@ -163,25 +144,34 @@ class MovieList extends Component {
                         
                     </MovFilter>
                     
-                    
-                    {/* <MovieMatches /> */}
-                    {/* </MovFilter> */}
-                </div>
+                    <MovList props={this.state.hideFilter}>
+                        {!this.props.anim ? (
+                            <MovieListAnimation />
+                        ) : (
+                                <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} />
+                            )
+
+                        }
+                    </MovList>
+                {/* </div> */}
 
             </RightDiv>
         )
     }
 }
 
+
 const MovList = styled.div`
+
 grid-row: 1;
 background-color: #E27D60;
     grid-column: ${props => props.props ? "1 / 3" : "2 / 3"}
+    
 `
 
 const MovFilter = styled.div`
     grid-row: 1;
-    background-color: #E8A872;
+    background-color: #a6a6a6;
     display: ${props => props.props ? "none" : ""};
     grid-column: 1/2;
     legend {

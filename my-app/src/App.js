@@ -109,7 +109,7 @@ class App extends React.Component {
                   <Route path='/movie' exact component={Movie} />
                   <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
                   <Route path='/cast' exact component={Cast} />
-                  {/* <Route path='/about' exact component={About} /> */}
+                  
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

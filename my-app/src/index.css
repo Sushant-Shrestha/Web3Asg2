@@ -4,7 +4,7 @@
   --details-back: #feffff;
   --details-box-back: #def2f1;
   --header-back: #17252A;
-  --button-back: #3aafa9;
+  --button-back: #ffffff;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
   --card-color: #ACD3B3;
@@ -50,9 +50,9 @@ button {
   margin: 0 0.5rem;
   background: var(--button-back);
   border: 0;
-  color: white;
+  color: #595959;
   padding: 10px;
-  border-radius:5px;
+  /* border-radius:5px; */
   font-size: 1em;  
 }
 
@@ -72,11 +72,11 @@ button {
 }
 
 img.favoriteItem {
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 div {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   gap: 10px;
 }
 
