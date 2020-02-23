@@ -5,6 +5,7 @@ class MovieDetails extends React.Component {
         super(props);
         this.state = {
             movie: [],
+            overview: ""
             
         }
     }
@@ -15,7 +16,7 @@ class MovieDetails extends React.Component {
             const response = await fetch(url);
             const jsonData = await response.json();
     
-            this.setState({ movie: jsonData});
+            this.setState({ movie: jsonData, overview: jsonData.details.overview});
             console.log(this.state.movie);
             // console.log(this.state.movie.details.overview);
     
@@ -44,7 +45,9 @@ class MovieDetails extends React.Component {
                             {this.state.movie.tagline} <br/>
                             <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br/>
                             <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br/>
-                            {/* {this.state.movie.details.overview} */}
+                            {
+                                this.state.overview
+                                }
                         </p>
                        
 
