@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
-import MovieDetails from './MovieDetails';
+
 
 export default function MovieRow(prop) {
     let { props } = prop;
