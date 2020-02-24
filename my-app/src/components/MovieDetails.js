@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Production from './Production';
 import Cast from './Cast';
+
 class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -27,16 +28,13 @@ class MovieDetails extends React.Component {
             const response = await fetch(url);
             const jsonData = await response.json();
 
-            this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, companies: jsonData.companies, countries: jsonData.countries, keywords: jsonData.keywords, genres: jsonData.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
-            console.log(this.state.movie);
-            // console.log(this.state.movie.details.overview);
-
+            this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
         } catch (error) {
             console.log(error);
         }
 
     }
-    
+
     normalView = () => {
         this.props.closeView();
     }
@@ -54,9 +52,9 @@ class MovieDetails extends React.Component {
     updateViewCast = (id) => {
         this.closeView();
         this.setViewCast(id);
-       
+
         // this.setState({ castID: id });
-        
+
         console.log(this.state.castID);
     }
 
@@ -64,8 +62,8 @@ class MovieDetails extends React.Component {
         return (
             <div>
                 {this.state.viewingCast ? (<div>
-                    
-                    <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast}/>
+
+                    <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
                 </div>)
                     : (
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
@@ -82,16 +80,51 @@ class MovieDetails extends React.Component {
                                 <button onClick={this.normalView}> CLOSE VIEW</button>
 
                                 <div>
-                                    {this.state.movie.release_date} <br />
-                                    ${this.state.movie.revenue} <br />
-                                    {this.state.movie.runtime}m <br />
-                                    {this.state.movie.tagline} <br />
-                                    <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br />
-                                    <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br />
-                                    {this.state.overview} <br />
-                                    {this.state.ratings.popularity} <br />
-                                    {this.state.ratings.average} <br />
-                                    {this.state.ratings.count} <br />
+                                    <BoxDetails> Release date - {this.state.movie.release_date} <br /></BoxDetails>
+
+                                    <BoxDetails>Revenue - ${this.state.movie.revenue} <br /></BoxDetails>
+                                    <BoxDetails> Runtime - {this.state.movie.runtime}m <br /></BoxDetails>
+                                    <BoxDetails> Tagling - {this.state.movie.tagline} <br /></BoxDetails>
+                                    <BoxDetails> <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br /></BoxDetails>
+                                    <BoxDetails> <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br /> </BoxDetails>
+                                    <BoxDetails> Overview -{this.state.overview} <br /> </BoxDetails>
+                                    <BoxDetails> Popularity-{this.state.ratings.popularity} <br /></BoxDetails>
+                                    <BoxDetails> Average- {this.state.ratings.average} <br /></BoxDetails>
+                                    <BoxDetails> Count-{this.state.ratings.count} <br /></BoxDetails>
+
+                                    <BoxDetails>Companies - {this.state.companies ? (<div> {this.state.companies.map((c, index) => {
+                                        return c.name
+                                    })} </div>) : (<div>
+                                        Companies are not available
+                                    </div>)}</BoxDetails>
+
+                                    <BoxDetails>Countries - {this.state.countries ? (<div> {this.state.countries.map((c, index) => {
+                                        return c.name
+                                    })} </div>) : (<div>
+                                        Countries are not available
+                                    </div>)}</BoxDetails>
+                                    {/* Countries - {this.state.countries.map((c, index) => {
+                                        return c.name
+                                    })} <br /> */}
+
+                                    <BoxDetails>Keywords - {this.state.keywords ? (<div> {this.state.keywords.map((c, index) => {
+                                        return c.name
+                                    })} </div>) : (<div>
+                                        Keywords are not available
+                                    </div>)}</BoxDetails>
+                                    {/* Keywords - {this.state.keywords.map((c, index) => {
+                                        return c.name
+                                    })} <br /> */}
+
+                                    <BoxDetails>Genres - {this.state.genres ? (<div> {this.state.genres.map((c, index) => {
+                                        return c.name
+                                    })} </div>) : (<div>
+                                        Genres are not available
+                                    </div>)}</BoxDetails>
+
+                                    {/* Genres - {this.state.genres.map((c, index) => {
+                                        return ", " + c.name 
+                                    })} <br /> */}
                                 </div>
 
                             </RightMovieDetails>
@@ -120,6 +153,10 @@ class MovieDetails extends React.Component {
 //     padding: 3em;,
 //     grid-row: 2;
 // `;
+const BoxDetails = styled.div`
+background-color: white;
+margin: 0px 10px 5px 10px;
+`;
 const LeftMovie = styled.div`
     padding: 3em;
     margin: 2em;

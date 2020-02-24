@@ -57,7 +57,14 @@ class Cast extends Component {
                                 <h2>{this.state.celeb.name}</h2>
                                 <img src={"https://image.tmdb.org/t/p/w185/" + this.state.celeb.profile_path} />
                             </LeftCastDetail>
-
+                            <RightCastDetail>
+                                <div>
+                                    {this.state.celeb.birthday} <br/> <br/>
+                                    {this.state.celeb.biography} <br/> <br/>
+                                    {this.state.celeb.place_of_birth} <br/> <br/>
+                                    <a href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id}>IMDB LINK</a> <br />
+                                </div>
+                            </RightCastDetail>
                             <ProductionList>
                                 <div>
                                     <h2> Production</h2>
@@ -90,6 +97,11 @@ const ProductionList = styled.div`
     justify-items: stretch;
     grid-column: span 2;
 `;
+
+const RightCastDetail = styled.div`
+  background-color: yellow;
+`;
+
 
 
 export default Cast;
