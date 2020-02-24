@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Production from './Production';
 import Cast from './Cast';
-
+import * as Vibrant from 'node-vibrant';
 class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +18,9 @@ class MovieDetails extends React.Component {
             crew: [],
             viewingCast: false,
             newView: false,
-            castID: ""
+            castID: "",
+            colourImage: "#fff",
+            colourText: "#bbbb"
         }
     }
 
@@ -27,6 +29,8 @@ class MovieDetails extends React.Component {
             let url = `http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
+            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor}))
+            // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
             this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
         } catch (error) {
@@ -66,18 +70,18 @@ class MovieDetails extends React.Component {
                     <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
                 </div>)
                     : (
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
+                        <div className='mainView' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
 
 
 
-                            <LeftMovieDetails> <div className="movieDetails">
-                                <h2>{this.state.movie.title}</h2>
-                                <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
+                            <LeftMovieDetails className='subView'> <div className="movieDetails subView" style={{backgroundColor: this.state.colourImage, boxShadow: 'none'}}>
+                                <h2 style={{color: this.state.colourText}}>{this.state.movie.title}</h2>
+                                <img  src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
                             </div>
                             </LeftMovieDetails>
 
-                            <RightMovieDetails>
-                                <button onClick={this.normalView}> CLOSE VIEW</button>
+                            <RightMovieDetails className='subView'>
+                                <button className='fa fa-close' onClick={this.normalView} style={{ float: 'right' }}></button>
 
                                 <div>
                                     <BoxDetails> Release date - {this.state.movie.release_date} <br /></BoxDetails>
@@ -129,7 +133,7 @@ class MovieDetails extends React.Component {
 
                             </RightMovieDetails>
 
-                            <ProductionList>
+                            <ProductionList className='subView'>
                                 <div>
 
                                     {/* <Production cast={this.state.cast} crew={this.state.crew} setViewCast={this.setViewCast} closeView={this.closeView}></Production> */}
@@ -165,7 +169,7 @@ const LeftMovie = styled.div`
     gridColumn: span;
 `;
 const LeftMovieDetails = styled.div`
-  background-color: red;
+    background-color: #a6a6a6;
 `;
 
 const RightMovieDetails = styled.div`
@@ -174,9 +178,10 @@ const RightMovieDetails = styled.div`
 `;
 
 const ProductionList = styled.div`
-    background-color: yellow;
+    padding: 10px;
     justify-items: stretch;
     grid-column: span 2;
+    background-color: #a6a6a6;
 `;
 
 const Column = styled.div`
