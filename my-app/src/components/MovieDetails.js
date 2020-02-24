@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Production from './Production';
+import Cast from './Cast';
 class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +16,7 @@ class MovieDetails extends React.Component {
             cast: [],
             crew: [],
             viewingCast: false,
-            castID: null
+            castID: ""
         }
     }
 
@@ -39,9 +40,10 @@ class MovieDetails extends React.Component {
     }
 
     setViewCast = (id) => {
-        this.setState({ viewingCast: true, castID: id });
-        console.log(this.state.id);
 
+        this.setState({ viewingCast: true });
+        this.setState({ castID: id });
+        console.log(this.state.castID);
     }
 
     closeView = () => {
@@ -51,50 +53,64 @@ class MovieDetails extends React.Component {
 
     render() {
         return (
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
+            <div>
+                {this.state.viewingCast ? (<div>
+                        {/* VIEW CAST HERE <br/>
+                        {this.state.castID} */}
+                        <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast}/>
+                </div>)
+                    : (
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
 
 
 
-                <LeftMovieDetails> <div className="movieDetails">
-                    <h2>{this.state.movie.title}</h2>
-                    <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
-                </div>
-                </LeftMovieDetails>
+                            <LeftMovieDetails> <div className="movieDetails">
+                                <h2>{this.state.movie.title}</h2>
+                                <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
+                            </div>
+                            </LeftMovieDetails>
 
-                <RightMovieDetails>
-                    <button onClick={this.normalView}> CLOSE VIEW</button>
+                            <RightMovieDetails>
+                                <button onClick={this.normalView}> CLOSE VIEW</button>
 
-                    <div>
-                        {this.state.movie.release_date} <br />
-                        ${this.state.movie.revenue} <br />
-                        {this.state.movie.runtime}m <br />
-                        {this.state.movie.tagline} <br />
-                        <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br />
-                        <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br />
-                        {this.state.overview} <br />
-                        {this.state.ratings.popularity} <br />
-                        {this.state.ratings.average} <br />
-                        {this.state.ratings.count} <br />
+                                <div>
+                                    {this.state.movie.release_date} <br />
+                                    ${this.state.movie.revenue} <br />
+                                    {this.state.movie.runtime}m <br />
+                                    {this.state.movie.tagline} <br />
+                                    <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br />
+                                    <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br />
+                                    {this.state.overview} <br />
+                                    {this.state.ratings.popularity} <br />
+                                    {this.state.ratings.average} <br />
+                                    {this.state.ratings.count} <br />
 
-                        {/* {this.state.crew.map((m) => {
+                                    {/* {this.state.crew.map((m) => {
                                 return  <p>{m.name}</p>
                             })} */}
-                    </div>
+                                </div>
 
 
 
-                </RightMovieDetails>
+                            </RightMovieDetails>
 
-                <ProductionList>
-                    <div>
-                        <h2> Production</h2>
-                        <u>Cast</u> <br />
-                        {this.state.cast.map((c,index) => {
-                            return  <Production key={index} setViewCast={this.setViewCast} person={c}/> 
-                        })}
-                    </div>
-                </ProductionList>
+                            <ProductionList>
+                                <div>
+                                    
+                                    <Production cast={this.state.cast} crew={this.state.crew} setViewCast={this.setViewCast} closeView={this.closeView}></Production>
+                                    <h2> Production</h2>
+                                    <u>Cast</u> <br />
+                                    {/* {this.state.cast.map((c, index) => {
+                                        return <Production key={index} setViewCast={this.setViewCast} cast={c} closeView={this.closeView} />
+                                    })} */}
+                                </div>
+                            </ProductionList>
+                        </div>
+
+                    )}
+
             </div>
+
 
 
 
