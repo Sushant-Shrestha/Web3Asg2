@@ -8,6 +8,8 @@ class Filter extends React.Component {
         super(props);
         this.state = {
             filteredList: [],
+            belowValue: '',
+            aboveValue: '',
             selectedYearOption: '',
             selectedRatingOption: ''
         };
@@ -15,14 +17,14 @@ class Filter extends React.Component {
         //Year
         this.beforeDate = React.createRef();
         this.afterDate = React.createRef();
-        this.fromDate = React.createRef();
-        this.toDate = React.createRef();
+        // this.fromDate = React.createRef();
+        // this.toDate = React.createRef();
 
         //Ratings
         this.belowRating = React.createRef();
         this.aboveRating = React.createRef();
-        this.fromRating = React.createRef();
-        this.toRating = React.createRef();
+        // this.belowValue = React.createRef();
+        // this.aboveValue = React.createRef();
     }
 
     render() {
@@ -47,8 +49,8 @@ class Filter extends React.Component {
                             <label htmlFor='yearBetween'>between</label> <br />
 
                             <div>
-                                <input type='text' name='beforeDate' ref={this.beforeDate} /> <br />
-                                <input type='text' name='afterDate' ref={this.afterDate} /> <br />
+                                <input type='text' name='beforeDate' ref={this.beforeDate} placeholder='Before...'/> <br />
+                                <input type='text' name='afterDate' ref={this.afterDate} placeholder='After...'/> <br />
                                 {/* <input type='text' name='fromDate' ref={this.fromDate} /><br />
                                 <input type='text' name='toDate' ref={this.toDate} /> <br /><br /> */}
                             </div></Label>
@@ -64,9 +66,14 @@ class Filter extends React.Component {
 
                             <input type='radio' id='ratingBetween' name='rating' value='ratingBetween' checked={this.state.selectedRatingOption === 'ratingBetween'} onChange={this.handleOptionChange} />
                             <label htmlFor='ratingBetween'>Between</label> <br />
+                            
+                            <div style={{ display: 'flex', justifyContent:'space-evenly'}}>
+                            <span>{this.state.belowValue}</span><input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating} onChange={this.showRangeValue}/> <br />
+                            </div>
 
-                            <input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating} /> <br />
-                            <input type='range' name='aboveRating' min='0' max='10' defaultValue='5' ref={this.aboveRating} /> <br />
+                            <div style={{ display: 'flex', justifyContent:'space-evenly'}}>
+                            <input type='range' name='aboveRating' min='0' max='10' defaultValue='5' ref={this.aboveRating} onChange={this.showRangeValue} /> <span>{this.state.aboveValue}</span><br />
+                            </div>
                             {/* <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating} /> <br />
                             <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating} /> <br /> */}
                             </Label>
@@ -84,7 +91,14 @@ class Filter extends React.Component {
         );
     }
 
+    showRangeValue = (e) => {
 
+        if(e.target.name === 'belowRating'){
+            this.setState({belowValue: e.target.value});
+        } else if(e.target.name === 'aboveRating'){
+            this.setState({aboveValue: e.target.value});
+        }
+    }
 
     handleOptionChange = (e) => {
         if (e.target.name == 'year') {
@@ -99,9 +113,11 @@ class Filter extends React.Component {
         this.props.titleChange(e.target.value);
     }
 
-    filterTrigger = () => {
+    filterTrigger = (e) => {
         //console.dir(this.state.filteredList);
+        e.preventDefault();
         let list = cloneDeep(this.props.filteredList);
+        console.dir(list);
 
         if (this.state.selectedYearOption != '') {
             let tempList = [];
@@ -123,7 +139,7 @@ class Filter extends React.Component {
             } else if (this.state.selectedYearOption == 'yearBetween') {
 
                 list.forEach((f) => {
-                    if ((f.release_date.split('-')[0] >= this.fromDate.current.value) && (f.release_date.split('-')[0] <= this.toDate.current.value)) {
+                    if ((f.release_date.split('-')[0] >= this.beforeDate.current.value) && (f.release_date.split('-')[0] <= this.afterDate.current.value)) {
                         tempList.push(f);
                     }
                 });
@@ -154,7 +170,7 @@ class Filter extends React.Component {
             } else if (this.state.selectedRatingOption == 'ratingBetween') {
                 //console.log(this.fromRating.current.value + " " + this.toRating.current.value);
                 list.forEach((f) => {
-                    if ((f.ratings.average >= this.fromRating.current.value) && (f.ratings.average <= this.toRating.current.value)) {
+                    if ((f.ratings.average >= this.belowRating.current.value) && (f.ratings.average <= this.aboveRating.current.value)) {
                         tempList.push(f);
                     }
                 });

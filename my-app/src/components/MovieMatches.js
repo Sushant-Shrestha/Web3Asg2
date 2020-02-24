@@ -83,6 +83,13 @@ export default class MovieMatches extends React.Component {
     }
 }
 
+const Wrapper = styled.div`
+    display: grid;
+    gridTemplateColumns: 1fr 1fr 1fr auto;
+    overflow: auto;
+    height: 95%;
+`;
+
 const FilterHeader = styled.div`
     font-weight: bold;
     font-size: large;

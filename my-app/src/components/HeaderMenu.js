@@ -11,7 +11,7 @@ export default function HeaderMenu(props) {
             </Link>
             
             <Btn>
-                <button onClick={props.hideTheFilter}>True</button>
+                <button onClick={props.hideTheFilter}>Toggle Filter</button>
                 {/* <Link to='/'>
                     <button onClick={props.setFetching}>Show All Movies</button>
                 </Link> */}

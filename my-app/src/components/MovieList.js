@@ -23,7 +23,7 @@ class MovieList extends Component {
             componentLoaded: false,
             searchTerm: this.props.searchTerm,
             isFetching: true,
-            filterAnim: true,
+            filterAnim: false,
             yearFilter: '',
             titleFilter: '',
             ratingFilter: ''
@@ -203,7 +203,7 @@ class MovieList extends Component {
                     <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
 
                     <FavDiv className='subView' props={this.state.hideFav}>
-                        <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} />
+                        <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView}/>
                     </FavDiv>
 
 
@@ -287,6 +287,7 @@ const MovFilter = styled.div`
 
 const FavDiv = styled.div`
     display: ${props => props.props ? "none" : ""};
+    background-image: url('https://ak4.picdn.net/shutterstock/videos/20618434/thumb/1.jpg?ip=x480');
 `
 
 
