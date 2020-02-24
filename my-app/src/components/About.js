@@ -5,27 +5,74 @@ import Modal from 'react-modal';
 
 const About = (props) => {
 
-    let imgUrl = "https://images.unsplash.com/photo-1547756536-cde3673fa2e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1411&q=80";
     return (
         <Modal
             style={{
+                overlay: {
+                },
 
+                content: {
+                    backgroundColor: 'var(--card-color)',
+                    color: 'var(--list-back)',
+
+                }
             }}
             isOpen={props.isOpen}
         >
 
-            <button onClick={props.closeModal} className='fa fa-close' style={{float: "right"}}></button>
+            <button onClick={props.closeModal} className='fa fa-close' style={{ float: "right" }}></button>
             <h1>About</h1>
-            <ul>
-                <li>Created by: Ralph Acusar, Peter Morrison, and Sushant Shrestha</li>
-                <li>Github link: <a href='https://github.com/PeterMorrison1/web3asg1'>https://github.com/PeterMorrison1/web3asg1</a></li>
-                <li>The animation effects were created through blood, sweat, and tears. Also using the following sources to force my idea into reality:</li>
-                <ul>
-                    <li>Using switch & Route render location: <a href="https://stackoverflow.com/questions/56434144/react-transition-group-not-working-with-react-router">https://stackoverflow.com/questions/56434144/react-transition-group-not-working-with-react-router</a></li>
-                    <li>Separating styled divs into other files: <a href="https://blog.cloudboost.io/separate-your-code-with-styled-components-ec4fd1ee3ef8">https://blog.cloudboost.io/separate-your-code-with-styled-components-ec4fd1ee3ef8</a></li>
-                    <li>Keyframes: <a href="https://styled-components.com/docs/basics#animations">https://styled-components.com/docs/basics#animations</a></li>
-                </ul>
-                <li>Animation icons were created using lottie from: <a href='https://www.npmjs.com/package/lottie-web'>https://www.npmjs.com/package/lottie-web</a></li>
+            <ul className='aboutULOne'>
+                <li className='aboutLI'>
+                    <div className='aboutCard'>
+
+                        <h3>Authors</h3>
+                        <ul>
+                            <li>Ralph Acusar</li>
+                            <li>Peter Morrison</li>
+                            <li>Sushant Shrestha</li>
+                        </ul>
+                    </div>
+                </li>
+                <li className='aboutLI'>
+                    <div className='aboutCard'>
+                        <h3>Github Links</h3>
+                        <ul>
+                            <li><a href='https://github.com/PeterMorrison1/web3asg1'>https://github.com/PeterMorrison1/web3asg1</a></li>
+                            <li><a>Insert page for our static webpage here</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li className='aboutLI'>
+                    <div className='aboutCard'>
+                        <h3>Icons</h3>
+                        <ul>
+                            <li>Animated icons from <a href='https://www.npmjs.com/package/lottie-web'>Lottie</a></li>
+                            <li>Static icons from <a href='https://fontawesome.com/icons?d=gallery'>Font Awesome</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li className='aboutLI'>
+                    <div className='aboutCard'>
+                        <h3>General npm Libraries</h3>
+                        <ul>
+                            <li><a href='https://www.npmjs.com/package/react-modal'>react-modal</a></li>
+                            <li><a href='https://www.npmjs.com/package/react-transition-group'>react-transition-group</a></li>
+                            <li><a href='https://www.npmjs.com/package/lodash'>lodash</a></li>
+                            <li>Other libs mentioned in Icons and View animation</li>
+                        </ul>
+                    </div>
+                </li>
+                <li className='aboutLI'>
+                    <div className='aboutCard'>
+                        <h3>View Animation</h3>
+                        <ul>
+                            <li>Render location usage from <a href="https://stackoverflow.com/questions/56434144/react-transition-group-not-working-with-react-router">good ol' stackoverflow</a></li>
+                            <li>Styled div files: <a href="https://blog.cloudboost.io/separate-your-code-with-styled-components-ec4fd1ee3ef8">https://blog.cloudboost.io/separate-your-code-with-styled-components-ec4fd1ee3ef8</a></li>
+                            <li>Keyframes: <a href="https://styled-components.com/docs/basics#animations">https://styled-components.com/docs/basics#animations</a></li>
+                        </ul>
+                    </div>
+                </li>
             </ul>
         </Modal>
 

@@ -7,9 +7,16 @@
   --button-back: #ffffff;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
+
   --card-color: #ACD3B3;
+  --card-h: #2b7a78;
+  --card-p: #2b7a78;
+  --background-general: #feffff;
+  --button: #def2f1;
 }
 
+/* a nice colour for a grey palette is : #ecf0f1 */
+/* also a nice colour for text with that is #2e3e50 */
 
 body {
   margin: 0;
@@ -94,4 +101,34 @@ button {
 
 .margin {
   margin: 10px;
+}
+
+
+/* ABOUT PAGE */
+.aboutCard {
+  width: 100%;
+  height: 100vh;
+  padding: 1% 2%;
+  background: #fff;
+  max-height: 220px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 4px rgba(0,0,0, .2);
+  
+}
+
+.aboutLI {
+  min-width: 24%;
+  margin: 2% .35%;
+  display: inline-flex;
+  border-radius: 10px;
+}
+
+.aboutCard h3 {
+  text-align: center;
+}
+
+@media (max-width: 700px) {
+  .aboutLI {
+    width: 100%;
+  }
 }
