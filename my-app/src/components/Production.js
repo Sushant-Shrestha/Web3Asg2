@@ -6,8 +6,8 @@ export default function Production(prop) {
 
     const view = (id) => {
         prop.setViewCast(id);
-        console.log(prop);
-        console.log(prop.id);
+        // console.log(prop);
+        // console.log(prop.id);
     }
 
     return (

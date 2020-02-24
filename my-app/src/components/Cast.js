@@ -9,7 +9,6 @@ class Cast extends Component {
         super(props);
         this.state = {
             celeb: [],
-            castID: this.props.id,
             viewingCast: false
         }
     }
@@ -35,9 +34,9 @@ class Cast extends Component {
     }
 
     newViewCast = (id) => {
-        this.setState({ viewingCast: true})
-        this.setState({ castID: id});
-        // this.props.setViewCast(id);
+        console.log(id);
+        this.props.updateViewCast(id);
+
     }
     render() {
         return (
@@ -46,7 +45,7 @@ class Cast extends Component {
 
                 {this.state.viewingCast ? (<div>
                     VIEW CAST HERE <br />
-                    <Cast id={this.state.castID} cast={this.props.cast} crew={this.props.crew} closeView={this.movieView} newViewCast={this.newViewCast} />
+                    {/* <Cast id={this.state.castID} cast={this.props.cast} crew={this.props.crew} closeView={this.movieView} newViewCast={this.newViewCast} /> */}
                     
                     {this.newViewCast(this.state.castID)}
                 </div>)

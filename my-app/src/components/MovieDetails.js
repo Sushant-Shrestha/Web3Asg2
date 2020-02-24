@@ -16,6 +16,7 @@ class MovieDetails extends React.Component {
             cast: [],
             crew: [],
             viewingCast: false,
+            newView: false,
             castID: ""
         }
     }
@@ -35,6 +36,7 @@ class MovieDetails extends React.Component {
         }
 
     }
+    
     normalView = () => {
         this.props.closeView();
     }
@@ -42,21 +44,28 @@ class MovieDetails extends React.Component {
     setViewCast = (id) => {
         this.setState({ viewingCast: true });
         this.setState({ castID: id });
-        console.log(this.state.castID);
+        // console.log(this.state.castID);
     }
 
     closeView = () => {
         this.setState({ viewingCast: false, castID: null });
     }
 
+    updateViewCast = (id) => {
+        this.closeView();
+        this.setViewCast(id);
+       
+        // this.setState({ castID: id });
+        
+        console.log(this.state.castID);
+    }
 
     render() {
         return (
             <div>
                 {this.state.viewingCast ? (<div>
-                    {/* VIEW CAST HERE <br/>
-                        {this.state.castID} */}
-                    <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} />
+                    
+                    <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast}/>
                 </div>)
                     : (
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
@@ -94,7 +103,7 @@ class MovieDetails extends React.Component {
                                     <h2> Production</h2>
                                     <u>Cast</u> <br />
                                     {this.state.cast.map((c, index) => {
-                                        return <Production key={index} setViewCast={this.setViewCast} person={c} closeView={this.closeView} />
+                                        return <Production key={index} setViewCast={this.setViewCast} person={c} closeView={this.closeView} updateViewCast={this.updateViewCast} />
                                     })}
                                 </div>
                             </ProductionList>
