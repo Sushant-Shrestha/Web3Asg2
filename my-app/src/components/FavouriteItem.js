@@ -9,7 +9,7 @@ const FavouriteItem = function (props) {
     let img = "https://image.tmdb.org/t/p/w92/" + props.movie.poster;
     return (
         <Image>
-            <img className='favoriteItem' src={img} alt={props.movie.title} title={props.movie.title} />
+            <img src={img} alt={props.movie.title} title={props.movie.title} />
             <button onClick={(e) => clickHandler(e, props.movie)}><i className='fa fa-trash'/></button>
         </Image>
     )

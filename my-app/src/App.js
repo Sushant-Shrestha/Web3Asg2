@@ -29,7 +29,7 @@ class App extends React.Component {
     this.setState({ movieList: movies });
     if (localStorage.getItem("movieList") === null) {
       try {
-        let url = 'http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
+        let url = 'https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
         if (this.state.movieList.length === 0) {
           const response = await fetch(url);
           const jsonData = await response.json();
@@ -107,9 +107,9 @@ class App extends React.Component {
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
+                  <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
                   <Route path='/cast' exact component={Cast} />
-                  
+                  {/* <Route path='/about' exact component={About} /> */}
                 </Switch>
               </CSSTransition>
             </TransitionGroup>

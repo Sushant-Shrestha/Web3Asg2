@@ -14,22 +14,27 @@ class Home extends React.Component {
             <LeftDiv className="banner"
                 style={{
                     backgroundImage: `url(${imgUrl})`,
-                    height: '800px',
+                    height: '100%',
                     width: "1920px",
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat'
+                    backgroundRepeat: 'no-repeat',
+                    display: 'grid',
+                    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
+                    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
                 }}>
                 <div
                     style={{
-                        backgroundColor: "var(--card-color)",
-                        padding: "2em"
+                        backgroundColor: "var(--home-box-color)",
+                        padding: "2em",
+                        gridColumn: '4/6',
+                        gridRow: '4/5'
                     }}
                 >
                     <h1>Movie Browser</h1>
                     <form>
-                        <label style={{paddingRight: "2em"}}>Title</label>
-                        <input type="text" onChange={this.handleChange}/>
+                        <label style={{ paddingRight: "2em" }}>Title</label>
+                        <input type="text" onChange={this.handleChange} />
                         <p>
                             <Link to='/MovieList'>
                                 <button>Show Matching Movies</button>
@@ -40,6 +45,19 @@ class Home extends React.Component {
                         </p>
                     </form>
                 </div>
+                {/* <div style={{gridColumn:'1/9'}}></div> */}
+                <div
+                    style={{
+                        backgroundColor: "var(--home-box-color)",
+                        height: '25',
+                        gridColumn: '1/9',
+                        gridRow: '7/8'
+                    }}>
+                    <h3>Banner Credit</h3>
+                    <p>@woolyart</p>
+                    <a href='https://unsplash.com/photos/HAl6CKxM3xU'>train on railway at daytime</a>
+                </div>
+
             </LeftDiv>
 
         );

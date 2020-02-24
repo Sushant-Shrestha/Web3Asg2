@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 
+
 export default function MovieRow(prop) {
     let { props } = prop;
     const clickHandler = (e, data) =>{
@@ -8,26 +9,33 @@ export default function MovieRow(prop) {
     }
     let img = "https://image.tmdb.org/t/p/w92/" + props.poster;
     // let year = props.release_date;
+
+    const view = (title, id, movie) => {
+        console.log(title +  "-" + id);
+        prop.setViewing(id);
+    }
+
+
     return (
-        <li style={{
+        <li className='movieRow' style={{
             gridColumn: 'span 3',
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr auto',
             padding: '10px',
             marginBottom: '10px',
-            backgroundColor: 'var(--card-color)',
-            borderRadius: '10px'
+            backgroundColor: 'var(--movie-row)',
+            borderRadius: '10px',
         }}>
             <div style={{ display: 'grid', gridTemplateColumns: 'auto 1fr', gridColumn: 'span 1' }}>
-                <Column><img style={{borderRadius: '10px'}} src={img} title={props.title} alt={props.title} /></Column>
-                <Column>{props.title}</Column>
+                <Column><img className='clickable' style={{borderRadius: '10px'}} src={img} title={props.title} alt={props.title} onClick={() => view(props.title, props.id, props)}/></Column>
+                <Column><p style={{fontSize: 'large'}} className='clickableText' onClick={() => view(props.title, props.id, props)} >{props.title}</p></Column>
             </div>
-            <Column>{props.release_date.split('-')[0]}</Column>
-            <Column>{props.ratings.average}</Column>
+            <Column style={{fontSize: 'large'}}>{props.release_date.split('-')[0]}</Column>
+            <Column style={{fontSize: 'large'}}>{props.ratings.average}</Column>
             <Column>
                 <div style={{ display: 'grid', gridGap: '10px' }}>
-                    <button>View</button>
-                    <button onClick={(e) => clickHandler(e, props)}>❤</button>
+                    <button className='clickable' onClick={() => view(props.title, props.id, props)}>View</button>
+                    <button className='clickable' onClick={(e) => clickHandler(e, props)} style={{color: '#DE67C3'}}>❤</button>
                 </div>
             </Column>
         </li>
