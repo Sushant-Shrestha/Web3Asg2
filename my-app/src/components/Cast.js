@@ -53,14 +53,14 @@ class Cast extends Component {
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
                             <LeftCastDetail>
-                                <button onClick={this.movieView}> CLOSE VIEW</button>
+                                <button style={{float: 'right'}} className='fa fa-close' onClick={this.movieView}></button>
                                 <h2>{this.state.celeb.name}</h2>
                                 <img src={"https://image.tmdb.org/t/p/w185/" + this.state.celeb.profile_path} />
                             </LeftCastDetail>
 
                             <ProductionList>
-                                <div>
-                                    <h2> Production</h2>
+                                <div className='subView'>
+                                    <h2>Production</h2>
                                     <u>Cast</u> <br />
                                     {this.props.cast.map((c, index) => {
                                         return <Production key={index} setViewCast={this.newViewCast} person={c} closeView={this.closeView} />
@@ -82,11 +82,11 @@ class Cast extends Component {
 }
 
 const LeftCastDetail = styled.div`
-  background-color: red;
+  background-color: var(--card-color);
 `;
 
 const ProductionList = styled.div`
-    background-color: yellow;
+    background-color: var(--card-color);
     justify-items: stretch;
     grid-column: span 2;
 `;

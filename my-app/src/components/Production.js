@@ -11,10 +11,11 @@ export default function Production(prop) {
     }
 
     return (
-        <div style={{
-            backgroundColor: 'teal',
+        <div className='movieRow' style={{
+            backgroundColor: 'var(--movie-row)',
             padding: '10px',
-            marginBottom: '5px',
+            margin: '10px',
+            borderRadius: '10px',
             display: 'grid',
             gridTemplateColumns: '1fr 1fr 1fr',
             gridColumn: 'span 1'
