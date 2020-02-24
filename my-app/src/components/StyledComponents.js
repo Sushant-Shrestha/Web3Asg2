@@ -15,7 +15,7 @@ const slideLeftOut = keyframes`
 export const LeftDiv = styled.div`
     height: '800px';
     width: "1920px";
-    background-color: pink;
+    background-color: #ffffff;
     position: absolute;
     &.slide-enter-active {
         animation: ${slideLeftIn} 0.2s linear; 
@@ -40,7 +40,7 @@ const slideRightOut = keyframes`
 export const RightDiv = styled.div`
     height: '800px';
     width: "1920px";
-    background-color: pink;
+    background-color: #ffffff;
     position: absolute;
     &.slide-enter-active {
         animation: ${slideRightIn} 0.2s linear; 
@@ -65,7 +65,7 @@ const slideUpOut = keyframes`
 export const UpDiv = styled.div`
     height: '800px';
     width: "1920px";
-    background-color: pink;
+    background-color: #ffffff;
     position: absolute;
     &.slide-enter-active {
         animation: ${slideUpIn} 0.2s linear; 
