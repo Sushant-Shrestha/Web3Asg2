@@ -221,7 +221,7 @@ class MovieList extends Component {
 
                     </MovFilter>
 
-                    <MovList className='subView' props={this.state.hideFilter} style={{height: '700px'}}>
+                    <MovList className='subView' props={this.state.hideFilter} style={{height: '750px'}}>
                         {!this.props.anim ? (
                             <div>
                                 <MovieListAnimation />
@@ -262,12 +262,22 @@ class MovieList extends Component {
 // `
 
 const MovList = styled.div`
+    position: absoulte;
+    margin: 0 5em;
+    padding: 0 2em;
+    background-color: #a6a6a6;
 
+    
     height: ${props => props.props ? "90%" : "79%"}
 `
 
 const MovFilter = styled.div`
+    margin: 0 2em;
+    border-radius: 10px;
     grid-row: 1;
+
+    background-color: #48D1CC;
+    
     display: ${props => props.props ? "none" : ""};
     grid-column: 1/2;
     legend {

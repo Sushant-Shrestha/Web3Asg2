@@ -7,6 +7,7 @@
   --border-color: #c2dde6;
   --list-box-back: #feffff;
   
+  --home-box-color: #48D1CC;
   --header-back: #17252A;
   --card-color: #ecf0f1;
   --card-h: #2b7a78;
@@ -14,6 +15,9 @@
   --background-general: #5a7d7c;
   --button: #def2f1;
   --movie-row: #a0c1d1;
+
+  /* --card-color: #ACD3B3; */
+  --card-color: white;
 }
 
 /* a nice colour for a grey palette is : #ecf0f1 */
@@ -32,6 +36,7 @@
   padding: 10px;
   margin: 10px;
   box-shadow: 0 2px 4px rgba(0,0,0, .4);
+  
 }
 
 .subView p {
@@ -121,7 +126,7 @@ img.favoriteItem {
 }
 
 div {
-  border-radius: 10px;
+  /* border-radius: 10px; */
   gap: 10px;
 }
 

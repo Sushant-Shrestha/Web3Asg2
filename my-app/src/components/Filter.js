@@ -28,7 +28,7 @@ class Filter extends React.Component {
     render() {
         return (
             <div>
-                <form className="filterForm" style={{ display: 'flex', flexFlow: 'row wrap' }}>
+                <form className="filterForm" style={{ display: 'flex', flexFlow: 'row wrap', justifyContent: 'space-evenly'}}>
 
                     <div>
                         <LabelTitle><label>Title</label></LabelTitle><br />
@@ -49,8 +49,8 @@ class Filter extends React.Component {
                             <div>
                                 <input type='text' name='beforeDate' ref={this.beforeDate} /> <br />
                                 <input type='text' name='afterDate' ref={this.afterDate} /> <br />
-                                <input type='text' name='fromDate' ref={this.fromDate} /><br />
-                                <input type='text' name='toDate' ref={this.toDate} /> <br /><br />
+                                {/* <input type='text' name='fromDate' ref={this.fromDate} /><br />
+                                <input type='text' name='toDate' ref={this.toDate} /> <br /><br /> */}
                             </div></Label>
                     </div>
 
@@ -67,8 +67,9 @@ class Filter extends React.Component {
 
                             <input type='range' name='belowRating' min='0' max='10' defaultValue='5' ref={this.belowRating} /> <br />
                             <input type='range' name='aboveRating' min='0' max='10' defaultValue='5' ref={this.aboveRating} /> <br />
-                            <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating} /> <br />
-                            <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating} /> <br /></Label>
+                            {/* <input type='range' name='fromRating' min='0' max='10' defaultValue='5' ref={this.fromRating} /> <br />
+                            <input type='range' name='toRating' min='0' max='10' defaultValue='5' ref={this.toRating} /> <br /> */}
+                            </Label>
 
                     </div>
 

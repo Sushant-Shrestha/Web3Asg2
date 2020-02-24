@@ -63,7 +63,7 @@ export default class MovieMatches extends React.Component {
                 overflow: 'auto',
                 height: '95%',
             }}>
-
+                
                 <FilterHeader style={{ gridColumn: 'span 1' }}>Title <div className={'fa ' + this.state.titleFilter + ' pointer'} onClick={this.sortTitle}/></FilterHeader>
                 <FilterHeader style={{ gridColumn: '2/3' }}>Year <div className={'fa ' + this.state.yearFilter + ' pointer'} onClick={this.sortYear}/></FilterHeader>
                 <FilterHeader style={{ gridColumn: '3/4' }}>Rating <div className={'fa '+ this.state.ratingFilter +' pointer'} onClick={this.sortRating}/></FilterHeader>

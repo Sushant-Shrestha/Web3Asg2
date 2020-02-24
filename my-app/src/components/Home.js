@@ -25,7 +25,7 @@ class Home extends React.Component {
                 }}>
                 <div
                     style={{
-                        backgroundColor: "var(--card-color)",
+                        backgroundColor: "var(--home-box-color)",
                         padding: "2em",
                         gridColumn: '4/6',
                         gridRow: '4/5'

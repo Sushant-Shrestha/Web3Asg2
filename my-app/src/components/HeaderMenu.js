@@ -39,7 +39,7 @@ const Header = styled.div`
 `;
 
 const Btn = styled.div`
-    display: grid;
-    justify-content: flex-end;
-    display: inline-block;
+    display: flex;
+    justify-content: flex-end;    
+    align-self: center;
 `;
