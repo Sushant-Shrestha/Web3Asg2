@@ -37,7 +37,7 @@ class Cast extends Component {
     newViewCast = (id) => {
         this.setState({ viewingCast: true})
         this.setState({ castID: id});
-        this.props.setViewCast(id);
+        // this.props.setViewCast(id);
     }
     render() {
         return (
@@ -46,8 +46,6 @@ class Cast extends Component {
 
                 {this.state.viewingCast ? (<div>
                     VIEW CAST HERE <br />
-                    {this.state.castID}
-                    {this.state.castID}
                     <Cast id={this.state.castID} cast={this.props.cast} crew={this.props.crew} closeView={this.movieView} newViewCast={this.newViewCast} />
                     
                     {this.newViewCast(this.state.castID)}
@@ -66,7 +64,7 @@ class Cast extends Component {
                                     <h2> Production</h2>
                                     <u>Cast</u> <br />
                                     {this.props.cast.map((c, index) => {
-                                        return <Production key={index} setViewCast={this.newViewCast} cast={c} closeView={this.closeView} />
+                                        return <Production key={index} setViewCast={this.newViewCast} person={c} closeView={this.closeView} />
                                     })}
                                 </div>
                             </ProductionList>
@@ -86,7 +84,6 @@ class Cast extends Component {
 
 const LeftCastDetail = styled.div`
   background-color: red;
-
 `;
 
 const ProductionList = styled.div`

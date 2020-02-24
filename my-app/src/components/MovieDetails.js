@@ -40,7 +40,6 @@ class MovieDetails extends React.Component {
     }
 
     setViewCast = (id) => {
-
         this.setState({ viewingCast: true });
         this.setState({ castID: id });
         console.log(this.state.castID);
@@ -55,9 +54,9 @@ class MovieDetails extends React.Component {
         return (
             <div>
                 {this.state.viewingCast ? (<div>
-                        {/* VIEW CAST HERE <br/>
+                    {/* VIEW CAST HERE <br/>
                         {this.state.castID} */}
-                        <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast}/>
+                    <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} />
                 </div>)
                     : (
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
@@ -84,37 +83,25 @@ class MovieDetails extends React.Component {
                                     {this.state.ratings.popularity} <br />
                                     {this.state.ratings.average} <br />
                                     {this.state.ratings.count} <br />
-
-                                    {/* {this.state.crew.map((m) => {
-                                return  <p>{m.name}</p>
-                            })} */}
                                 </div>
-
-
 
                             </RightMovieDetails>
 
                             <ProductionList>
                                 <div>
-                                    
-                                    <Production cast={this.state.cast} crew={this.state.crew} setViewCast={this.setViewCast} closeView={this.closeView}></Production>
+
+                                    {/* <Production cast={this.state.cast} crew={this.state.crew} setViewCast={this.setViewCast} closeView={this.closeView}></Production> */}
                                     <h2> Production</h2>
                                     <u>Cast</u> <br />
-                                    {/* {this.state.cast.map((c, index) => {
-                                        return <Production key={index} setViewCast={this.setViewCast} cast={c} closeView={this.closeView} />
-                                    })} */}
+                                    {this.state.cast.map((c, index) => {
+                                        return <Production key={index} setViewCast={this.setViewCast} person={c} closeView={this.closeView} />
+                                    })}
                                 </div>
                             </ProductionList>
                         </div>
 
                     )}
-
             </div>
-
-
-
-
-            //production here
         );
     }
 }
@@ -133,7 +120,6 @@ const LeftMovie = styled.div`
 `;
 const LeftMovieDetails = styled.div`
   background-color: red;
-
 `;
 
 const RightMovieDetails = styled.div`
