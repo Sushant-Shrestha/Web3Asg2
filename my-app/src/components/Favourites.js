@@ -6,10 +6,6 @@ export default class Favourites extends Component {
         return (
             <div className="favorites" style={{
                 gridColumn: 'span 3',
-                padding: '10px',
-                marginBottom: '10px',
-                backgroundColor: 'var(--card-color)',
-                borderRadius: '10px'
             }}>
                 <div>
                     <p>Favourites</p>

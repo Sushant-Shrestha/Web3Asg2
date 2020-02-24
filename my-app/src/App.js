@@ -107,7 +107,7 @@ class App extends React.Component {
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
+                  <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
                   <Route path='/cast' exact component={Cast} />
                   {/* <Route path='/about' exact component={About} /> */}
                 </Switch>

@@ -3,20 +3,48 @@
   --favorites-back: #def2f1;
   --details-back: #feffff;
   --details-box-back: #def2f1;
-  --header-back: #17252A;
   --button-back: #ffffff;
   --border-color: #c2dde6;
   --list-box-back: #feffff;
-
-  --card-color: #ACD3B3;
+  
+  --header-back: #17252A;
+  --card-color: #ecf0f1;
   --card-h: #2b7a78;
-  --card-p: #2b7a78;
-  --background-general: #feffff;
+  --card-p: #2e3e50;
+  --background-general: #5a7d7c;
   --button: #def2f1;
+  --movie-row: #a0c1d1;
 }
 
 /* a nice colour for a grey palette is : #ecf0f1 */
 /* also a nice colour for text with that is #2e3e50 */
+
+.mainView {
+  background-color: var(--background-general);
+}
+
+.headerView {
+  background-color: var(--card-color);
+}
+
+.subView {
+  background-color: var(--card-color);
+  padding: 10px;
+  margin: 10px;
+  box-shadow: 0 2px 4px rgba(0,0,0, .4);
+}
+
+.subView p {
+  color: var(--card-p);
+}
+
+.movieRow {
+  box-shadow: 0 2px 4px rgba(0,0,0, .4);
+}
+
+.movieRow:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0, .3);
+}
 
 body {
   margin: 0;
@@ -59,8 +87,20 @@ button {
   border: 0;
   color: #595959;
   padding: 10px;
-  /* border-radius:5px; */
+  border-radius:5px;
   font-size: 1em;
+}
+
+.clickable {
+  box-shadow: 0 2px 4px rgba(0,0,0, .5);
+}
+
+.clickable:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0, .2);
+}
+
+.clickableText {
+  cursor: pointer;
 }
 
 .favorites {
@@ -70,10 +110,8 @@ button {
 
   align-items: center;
   grid-gap: 5px;
-  background: var(--favorites-back);
-  color: var(--header-back);
   padding: 5px;
-  font-size: 0.8em;
+  font-size: 1em;
   font-weight: bold;
   text-transform: uppercase;
 }
