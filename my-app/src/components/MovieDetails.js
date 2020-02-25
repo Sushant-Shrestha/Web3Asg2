@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Production from './Production';
 import Cast from './Cast';
 import * as Vibrant from 'node-vibrant';
+import PortraitModal from './PortraitModal';
 class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -62,9 +63,18 @@ class MovieDetails extends React.Component {
         console.log(this.state.castID);
     }
 
+    openModal = () => {
+        this.setState({ modalIsOpen: true })
+    }
+
+    closeModal = () => {
+        this.setState({ modalIsOpen: false })
+    }
+
     render() {
         return (
             <div>
+                <PortraitModal isOpen={this.state.modalIsOpen} closeModal={this.closeModal} colourImage={this.state.colourImage} colourText={this.state.colourText} portrait={this.state.movie.poster} title={this.state.movie.title}/>
                 {this.state.viewingCast ? (<div>
 
                     <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
@@ -74,13 +84,13 @@ class MovieDetails extends React.Component {
 
 
 
-                            <LeftMovieDetails className='subView'> <div className="movieDetails subView" style={{backgroundColor: this.state.colourImage, boxShadow: 'none'}}>
+                            <LeftMovieDetails colourImage={this.state.colourImage}> <div className="movieDetails subView" style={{backgroundColor: this.state.colourImage, boxShadow: 'none'}}>
                                 <h2 style={{color: this.state.colourText}}>{this.state.movie.title}</h2>
-                                <img  src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
+                                <img className='clickable' src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} onClick={this.openModal}/>
                             </div>
                             </LeftMovieDetails>
 
-                            <RightMovieDetails className='subView'>
+                            <RightMovieDetails colourImage={this.state.colourImage} className='subView'>
                                 <button className='fa fa-close' onClick={this.normalView} style={{ float: 'right' }}></button>
 
                                 <div>
@@ -169,7 +179,7 @@ const LeftMovie = styled.div`
     gridColumn: span;
 `;
 const LeftMovieDetails = styled.div`
-    background-color: #a6a6a6;
+    background-color: $(props => props.colourImage);
 `;
 
 const RightMovieDetails = styled.div`
