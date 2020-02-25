@@ -116,15 +116,13 @@ class MovieDetails extends React.Component {
             <div>
                 {this.state.detailAnim ? (<DetailsAnimation />) : (
                     <div>
-                    <FontAwesomeIcon icon={faStar} />
-                    <FontAwesomeIcon icon={faStarHalfAlt} />
-                    <FontAwesomeIcon icon={faEmptyStar} />
+                
                     {this.state.viewingCast ? (<div>
     
                         <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
                     </div>)
                         : (
-                            <div className='mainView' style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
+                            <MainDiv>
     
     
     
@@ -138,31 +136,32 @@ class MovieDetails extends React.Component {
                                     <button className='fa fa-close' onClick={this.normalView} style={{ float: 'right' }}></button>
     
                                     <div>
-                                        <BoxDetails> Release date - {this.state.movie.release_date} <br /></BoxDetails>
+                                        <BoxDetails> <b>Release date</b> {this.state.movie.release_date} <br />
+                                        <b>Revenue</b> ${this.state.movie.revenue} <br />
+                                        <b>Runtime</b> {this.state.movie.runtime} min <br />
+                                        <b>Tagline</b> {this.state.movie.tagline} <br /></BoxDetails>
+
+                                        <BoxDetails> <a style={{paddingRight: '1em'}} href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> 
+                                        <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br /> </BoxDetails>
+
+                                        <BoxDetails> <b>Overview</b> {this.state.overview} <br /> 
+                                        <b>Popularity</b> {this.state.ratings.popularity} 
     
-                                        <BoxDetails>Revenue - ${this.state.movie.revenue} <br /></BoxDetails>
-                                        <BoxDetails> Runtime - {this.state.movie.runtime}m <br /></BoxDetails>
-                                        <BoxDetails> Tagling - {this.state.movie.tagline} <br /></BoxDetails>
-                                        <BoxDetails> <a href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> <br /></BoxDetails>
-                                        <BoxDetails> <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br /> </BoxDetails>
-                                        <BoxDetails> Overview -{this.state.overview} <br /> </BoxDetails>
-                                        <BoxDetails> Popularity-{this.state.ratings.popularity} <br /></BoxDetails>
     
-    
-                                        <BoxDetails> Average- {this.state.ratings.average} <br />
+                                        <b style={{paddingLeft: '1em'}}>Average</b> {this.state.ratings.average} <br />
+                                        <b>Count</b> {this.state.ratings.count} <br />
                                             {/* <StarRatings avg={this.state.avg}/> */}
                                             {this.state.starArray.map((s, i) => s)}
     
                                         </BoxDetails>
-                                        <BoxDetails> Count-{this.state.ratings.count} <br /></BoxDetails>
     
-                                        <BoxDetails>Companies - {this.state.companies ? (<div> {this.state.companies.map((c, index) => {
+                                        <BoxDetails><b>Companies</b>  {this.state.companies ? (<div> {this.state.companies.map((c, index) => {
                                             return c.name
                                         })} </div>) : (<div>
                                             Companies are not available
-                                        </div>)}</BoxDetails>
+                                        </div>)}
     
-                                        <BoxDetails>Countries - {this.state.countries ? (<div> {this.state.countries.map((c, index) => {
+                                        <b>Countries</b>  {this.state.countries ? (<div> {this.state.countries.map((c, index) => {
                                             return c.name
                                         })} </div>) : (<div>
                                             Countries are not available
@@ -171,7 +170,7 @@ class MovieDetails extends React.Component {
                                             return c.name
                                         })} <br /> */}
     
-                                        <BoxDetails> <h3>Keywords</h3> <br/> {this.state.keywords ? (<div> {this.state.keywords.map((c, index) => {
+                                        <BoxDetails> <b>Keywords</b>{this.state.keywords ? (<div> {this.state.keywords.map((c, index) => {
                                             return c.name + " "
                                         })} </div>) : (<div>
                                             Keywords are not available
@@ -180,7 +179,7 @@ class MovieDetails extends React.Component {
                                             return c.name
                                         })} <br /> */}
     
-                                        <BoxDetails>Genres - {this.state.genres ? (<div> {this.state.genres.map((c, index) => {
+                                        <BoxDetails><b>Genres</b> {this.state.genres ? (<div> {this.state.genres.map((c, index) => {
                                             return c.name + " "
                                         })} </div>) : (<div>
                                             Genres are not available
@@ -205,7 +204,7 @@ class MovieDetails extends React.Component {
     
                                     </div>
                                 </ProductionList>
-                            </div>
+                            </MainDiv>
     
                         )}
                 </div>
@@ -220,6 +219,11 @@ class MovieDetails extends React.Component {
 //     padding: 3em;,
 //     grid-row: 2;
 // `;
+const MainDiv = styled.div`
+    display: flex;
+    height: 800px;
+`;
+
 const BoxDetails = styled.div`
 background-color: white;
 margin: 0px 50px 5px 50px;
@@ -234,18 +238,20 @@ const LeftMovie = styled.div`
 `;
 const LeftMovieDetails = styled.div`
     background-color: #a6a6a6;
+    
 `;
 
 const RightMovieDetails = styled.div`
-   background-color: lightblue
-   
+   background-color: lightblue;
+    width: 700px;
 `;
 
 const ProductionList = styled.div`
     padding: 10px;
     justify-items: stretch;
-    grid-column: span 2;
+    // grid-column: span 2;
     background-color: #a6a6a6;
+    overflow-y: scroll;
 `;
 
 const Column = styled.div`

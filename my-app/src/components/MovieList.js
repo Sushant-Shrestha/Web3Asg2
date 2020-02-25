@@ -217,7 +217,7 @@ class MovieList extends Component {
                 <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
 
                 <FavDiv className='subView' props={this.state.hideFav}>
-                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView} />
+                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView}/>
                 </FavDiv>
 
 
