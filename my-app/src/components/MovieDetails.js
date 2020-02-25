@@ -116,11 +116,7 @@ class MovieDetails extends React.Component {
             <div>
                 {this.state.detailAnim ? (<DetailsAnimation />) : (
                     <div>
-<<<<<<< HEAD
-                    
-=======
                 
->>>>>>> fc144d306a77dde7756ea49579d971e9025ef445
                     {this.state.viewingCast ? (<div>
     
                         <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
