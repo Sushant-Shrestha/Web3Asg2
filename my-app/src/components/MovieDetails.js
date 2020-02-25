@@ -238,7 +238,7 @@ const LeftMovie = styled.div`
 `;
 const LeftMovieDetails = styled.div`
     background-color: #a6a6a6;
-    
+    width: 500px;
 `;
 
 const RightMovieDetails = styled.div`
