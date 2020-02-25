@@ -60,6 +60,7 @@ const About = (props) => {
                             <li><a href='https://www.npmjs.com/package/react-transition-group'>react-transition-group</a></li>
                             <li><a href='https://www.npmjs.com/package/lodash'>lodash</a></li>
                             <li><a href='https://www.npmjs.com/package/node-vibrant'>node-vibrant; offshoot of Android palette class</a></li>
+                            <li><a href='https://www.digitalocean.com/community/tutorials/how-to-use-font-awesome-5-with-react'>Font awesome icons with react</a></li>
                             <li>Other libs mentioned in Icons and View animation</li>
                         </ul>
                     </div>

@@ -22,7 +22,7 @@ export default function Production(prop) {
 
         }}>
             <Column> <div>{prop.person.name}</div></Column>
-            <Column><div>{prop.person.character}</div></Column>
+            <Column><div> as {prop.person.character}</div></Column>
             <Column>
                 <div>
                     

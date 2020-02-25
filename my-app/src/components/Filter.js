@@ -101,9 +101,9 @@ class Filter extends React.Component {
     }
 
     handleOptionChange = (e) => {
-        if (e.target.name == 'year') {
+        if (e.target.name === 'year') {
             this.setState({ selectedYearOption: e.target.value });
-        } else if (e.target.name == 'rating') {
+        } else if (e.target.name === 'rating') {
             this.setState({ selectedRatingOption: e.target.value });
         }
     }
@@ -119,10 +119,10 @@ class Filter extends React.Component {
         let list = cloneDeep(this.props.filteredList);
         console.dir(list);
 
-        if (this.state.selectedYearOption != '') {
+        if (this.state.selectedYearOption !== '') {
             let tempList = [];
 
-            if (this.state.selectedYearOption == 'before') {
+            if (this.state.selectedYearOption === 'before') {
 
                 list.forEach((f) => {
                     if (f.release_date.split('-')[0] <= this.beforeDate.current.value) {
@@ -153,21 +153,21 @@ class Filter extends React.Component {
         if (this.state.selectedRatingOption != '') {
             let tempList = [];
 
-            if (this.state.selectedRatingOption == 'below') {
+            if (this.state.selectedRatingOption === 'below') {
 
                 list.forEach((f) => {
                     if (f.ratings.average <= this.belowRating.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if (this.state.selectedRatingOption == 'above') {
+            } else if (this.state.selectedRatingOption === 'above') {
 
                 list.forEach((f) => {
                     if (f.ratings.average >= this.aboveRating.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if (this.state.selectedRatingOption == 'ratingBetween') {
+            } else if (this.state.selectedRatingOption === 'ratingBetween') {
                 //console.log(this.fromRating.current.value + " " + this.toRating.current.value);
                 list.forEach((f) => {
                     if ((f.ratings.average >= this.belowRating.current.value) && (f.ratings.average <= this.aboveRating.current.value)) {
@@ -198,8 +198,5 @@ const Label = styled.label`
     font-size: 1em
 `;
 
-const FormCSS = styled.div`
-
-`;
 
 export default Filter;

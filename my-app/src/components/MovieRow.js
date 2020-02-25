@@ -11,7 +11,7 @@ export default function MovieRow(prop) {
     // let year = props.release_date;
 
     const view = (title, id, movie) => {
-        console.log(title +  "-" + id);
+        //console.log(title +  "-" + id);
         prop.setViewing(id);
     }
 

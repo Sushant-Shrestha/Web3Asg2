@@ -6,6 +6,7 @@ const FavouriteItem = function (props) {
         props.removeFavourite(data);
     }
 
+    
     let img = "https://image.tmdb.org/t/p/w92/" + props.movie.poster;
     return (
         <Image>
