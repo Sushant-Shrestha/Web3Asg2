@@ -29,7 +29,8 @@ class MovieList extends Component {
             filterAnim: false,
             yearFilter: '',
             titleFilter: '',
-            ratingFilter: ''
+            ratingFilter: '',
+            listAnim: false
         }
     }
 
@@ -59,13 +60,14 @@ class MovieList extends Component {
                     const jsonData = await response.json();
                     this.setState({ filteredMovies: jsonData, isFetching: false })
                     localStorage.setItem("movieList", JSON.stringify(jsonData));
+                    this.setState({listAnim: true});
                 } catch (error) {
                     console.error(error);
                 }
             }
         }
 
-        this.setState({ filterAnim: false });
+        this.setState({ filterAnim: false, listAnim: true });
         if (this.state.hidefav === true && this.props.favs.length > 0) {
             this.setState({ hideFav: false })
         } else {
@@ -217,7 +219,7 @@ class MovieList extends Component {
                 <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
 
                 <FavDiv className='subView' props={this.state.hideFav}>
-                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView}/>
+                    <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView} />
                 </FavDiv>
 
 
@@ -238,7 +240,7 @@ class MovieList extends Component {
 
                             </MovFilter>
                             <MovList className='subView' props={this.state.hideFilter} style={{ height: '750px' }}>
-                                {!this.props.anim ? (
+                                {!this.state.listAnim ? (
                                     <div>
                                         <MovieListAnimation />
                                         <p>Loading...</p>
@@ -260,32 +262,12 @@ class MovieList extends Component {
     }
 }
 
-// const MovList = styled.div`
-// grid-row: 1;
-// background-color: #E27D60;
-//     grid-column: ${props => props.props ? "1 / 3" : "2 / 3"}
-// `
-
-// const MovFilter = styled.div`
-//     grid-row: 1;
-//     background-color: #E8A872;
-//     display: ${props => props.props ? "none" : ""};
-//     grid-column: 1/2;
-//     legend {
-//       text-color: red;  
-//     }
-// `
-
-// const FavDiv = styled.div`
-//     display: ${props => props.props ? "none" : ""};
-// `
 
 const MovList = styled.div`
     position: absoulte;
     margin: 0 5em;
     padding: 0 2em;
     background-color: #a6a6a6;
-
     
     height: ${props => props.props ? "90%" : "79%"}
 `
