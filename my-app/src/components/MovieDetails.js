@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import Production from './Production';
 import Cast from './Cast';
 import * as Vibrant from 'node-vibrant';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import { faStar as faEmptyStar } from '@fortawesome/free-regular-svg-icons';
-import StarRatings from './StarRatings';
+
 
 class MovieDetails extends React.Component {
     constructor(props) {
@@ -90,9 +87,6 @@ class MovieDetails extends React.Component {
     render() {
         return (
             <div>
-                <FontAwesomeIcon icon={faStar} />
-                <FontAwesomeIcon icon={faStarHalfAlt} />
-                <FontAwesomeIcon icon={faEmptyStar} />
                 {this.state.viewingCast ? (<div>
 
                     <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
@@ -103,7 +97,7 @@ class MovieDetails extends React.Component {
 
 
                             <LeftMovieDetails className='subView'> <div className="movieDetails subView" style={{ backgroundColor: this.state.colourImage, boxShadow: 'none' }}>
-                                <h2 style={{ color: this.state.colourText }}>{this.state.movie.title}</h2>
+                                <h2 style={{ color: this.state.colourText }}>{this.state.movie.title} ({this.state.movie.runtime}m)</h2>
                                 <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
                             </div>
                             </LeftMovieDetails>
@@ -124,7 +118,7 @@ class MovieDetails extends React.Component {
 
 
                                     <BoxDetails> Average- {this.state.ratings.average} <br />
-                                        <StarRatings avg={this.state.avg}/>
+                                        {/* <StarRatings avg={this.state.avg}/> */}
 
                                     </BoxDetails>
                                     <BoxDetails> Count-{this.state.ratings.count} <br /></BoxDetails>
