@@ -6,7 +6,7 @@ import * as Vibrant from 'node-vibrant';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faEmptyStar } from '@fortawesome/free-regular-svg-icons';
-import StarRatings from './StarRatings';
+import * as cloneDeep from 'lodash/cloneDeep';
 
 class MovieDetails extends React.Component {
     constructor(props) {
@@ -26,7 +26,8 @@ class MovieDetails extends React.Component {
             castID: "",
             colourImage: "#fff",
             colourText: "#bbbb",
-            avg: ''
+            avg: '',
+            starArray: []
         }
     }
 
@@ -38,12 +39,30 @@ class MovieDetails extends React.Component {
             Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
             // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
-            this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
+            this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, avg: jsonData.ratings.average, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
 
-            // this.setState({ avg: 2 });
-            // console.log(this.state.avg);
+        
+            let tempArray = cloneDeep(this.state.starArray);
+            const Whole = <FontAwesomeIcon icon={faStar} />;
+            const Half = <FontAwesomeIcon icon={faStarHalfAlt} />;
+            const Empty = <FontAwesomeIcon icon={faEmptyStar} />;
+
+            let numStars = Math.round(this.state.avg);
+
+            for (let n = 0; n < parseInt(this.state.avg, 10); n++) {
+                tempArray.push(Whole);
+            }
+
+            if (this.state.avg > parseInt(this.state.avg, 10)) {
+                tempArray.push(Half);
+            }
+
+            for (let n = 0; n < 10 - numStars; n++) {
+                tempArray.push(Empty);
+            }
             
-            this.roundByHalf(6.2);
+
+            this.setState({starArray: tempArray});
         } catch (error) {
             console.log(error);
         }
@@ -124,7 +143,8 @@ class MovieDetails extends React.Component {
 
 
                                     <BoxDetails> Average- {this.state.ratings.average} <br />
-                                        <StarRatings avg={this.state.avg}/>
+                                        {/* <StarRatings avg={this.state.avg}/> */}
+                                        {this.state.starArray.map((s, i) => s)}
 
                                     </BoxDetails>
                                     <BoxDetails> Count-{this.state.ratings.count} <br /></BoxDetails>
