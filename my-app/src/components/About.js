@@ -39,7 +39,7 @@ const About = (props) => {
                         <h3>Github Links</h3>
                         <ul>
                             <li><a href='https://github.com/PeterMorrison1/web3asg1'>https://github.com/PeterMorrison1/web3asg1</a></li>
-                            <li><a>Insert page for our static webpage here</a></li>
+                            <li><a href='https://youthful-blackwell-e2984b.netlify.com/'>Working site: https://youthful-blackwell-e2984b.netlify.com/</a></li>
                         </ul>
                     </div>
                 </li>
