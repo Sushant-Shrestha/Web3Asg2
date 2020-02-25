@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import Production from './Production';
 import Cast from './Cast';
 import * as Vibrant from 'node-vibrant';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar as faEmptyStar } from '@fortawesome/free-regular-svg-icons';
+import StarRatings from './StarRatings';
+
 class MovieDetails extends React.Component {
     constructor(props) {
         super(props);
@@ -20,7 +25,8 @@ class MovieDetails extends React.Component {
             newView: false,
             castID: "",
             colourImage: "#fff",
-            colourText: "#bbbb"
+            colourText: "#bbbb",
+            avg: ''
         }
     }
 
@@ -29,10 +35,15 @@ class MovieDetails extends React.Component {
             let url = `http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
-            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor}))
+            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
             // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
             this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
+
+            // this.setState({ avg: 2 });
+            // console.log(this.state.avg);
+            
+            this.roundByHalf(6.2);
         } catch (error) {
             console.log(error);
         }
@@ -56,15 +67,32 @@ class MovieDetails extends React.Component {
     updateViewCast = (id) => {
         this.closeView();
         this.setViewCast(id);
-
-        // this.setState({ castID: id });
-
-        console.log(this.state.castID);
     }
 
+    roundByHalf = (num) => {
+        let rounded = Math.round(num * 2) / 2;
+        this.setState({ avg: rounded });
+        
+    }
+
+    createRatings = () =>{
+        let tempNum = 6.5
+        let numStars = tempNum- 0.5;
+        console.log(numStars);
+        let remainder = 10 - numStars;
+        console.log(remainder);
+        
+        // if((numStars + emptyStars) != 10){
+
+        //}
+    }
+    
     render() {
         return (
             <div>
+                <FontAwesomeIcon icon={faStar} />
+                <FontAwesomeIcon icon={faStarHalfAlt} />
+                <FontAwesomeIcon icon={faEmptyStar} />
                 {this.state.viewingCast ? (<div>
 
                     <Cast id={this.state.castID} cast={this.state.cast} crew={this.state.crew} closeView={this.closeView} setViewCast={this.setViewCast} updateViewCast={this.updateViewCast} />
@@ -74,9 +102,9 @@ class MovieDetails extends React.Component {
 
 
 
-                            <LeftMovieDetails className='subView'> <div className="movieDetails subView" style={{backgroundColor: this.state.colourImage, boxShadow: 'none'}}>
-                                <h2 style={{color: this.state.colourText}}>{this.state.movie.title}</h2>
-                                <img  src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
+                            <LeftMovieDetails className='subView'> <div className="movieDetails subView" style={{ backgroundColor: this.state.colourImage, boxShadow: 'none' }}>
+                                <h2 style={{ color: this.state.colourText }}>{this.state.movie.title}</h2>
+                                <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} />
                             </div>
                             </LeftMovieDetails>
 
@@ -93,7 +121,12 @@ class MovieDetails extends React.Component {
                                     <BoxDetails> <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br /> </BoxDetails>
                                     <BoxDetails> Overview -{this.state.overview} <br /> </BoxDetails>
                                     <BoxDetails> Popularity-{this.state.ratings.popularity} <br /></BoxDetails>
-                                    <BoxDetails> Average- {this.state.ratings.average} <br /></BoxDetails>
+
+
+                                    <BoxDetails> Average- {this.state.ratings.average} <br />
+                                        <StarRatings avg={this.state.avg}/>
+
+                                    </BoxDetails>
                                     <BoxDetails> Count-{this.state.ratings.count} <br /></BoxDetails>
 
                                     <BoxDetails>Companies - {this.state.companies ? (<div> {this.state.companies.map((c, index) => {
@@ -111,8 +144,8 @@ class MovieDetails extends React.Component {
                                         return c.name
                                     })} <br /> */}
 
-                                    <BoxDetails>Keywords - {this.state.keywords ? (<div> {this.state.keywords.map((c, index) => {
-                                        return c.name
+                                    <BoxDetails> <h3>Keywords</h3> <br/> {this.state.keywords ? (<div> {this.state.keywords.map((c, index) => {
+                                        return c.name + " "
                                     })} </div>) : (<div>
                                         Keywords are not available
                                     </div>)}</BoxDetails>
@@ -121,7 +154,7 @@ class MovieDetails extends React.Component {
                                     })} <br /> */}
 
                                     <BoxDetails>Genres - {this.state.genres ? (<div> {this.state.genres.map((c, index) => {
-                                        return c.name
+                                        return c.name + " "
                                     })} </div>) : (<div>
                                         Genres are not available
                                     </div>)}</BoxDetails>
@@ -135,13 +168,14 @@ class MovieDetails extends React.Component {
 
                             <ProductionList className='subView'>
                                 <div>
-
-                                    {/* <Production cast={this.state.cast} crew={this.state.crew} setViewCast={this.setViewCast} closeView={this.closeView}></Production> */}
                                     <h2> Production</h2>
                                     <u>Cast</u> <br />
-                                    {this.state.cast.map((c, index) => {
+                                    {this.state.cast ? (<div> {this.state.cast.map((c, index) => {
                                         return <Production key={index} setViewCast={this.setViewCast} person={c} closeView={this.closeView} updateViewCast={this.updateViewCast} />
-                                    })}
+                                    })} </div>) : (<div>
+                                        No available cast
+                                    </div>)}
+
                                 </div>
                             </ProductionList>
                         </div>
@@ -159,7 +193,8 @@ class MovieDetails extends React.Component {
 // `;
 const BoxDetails = styled.div`
 background-color: white;
-margin: 0px 10px 5px 10px;
+margin: 0px 50px 5px 50px;
+padding: 20px;
 `;
 const LeftMovie = styled.div`
     padding: 3em;

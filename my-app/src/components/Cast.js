@@ -30,7 +30,7 @@ class Cast extends Component {
 
     movieView = () => {
         this.props.closeView();
-        this.setState({ viewingCast: false});
+        this.setState({ viewingCast: false });
     }
 
     newViewCast = (id) => {
@@ -46,22 +46,23 @@ class Cast extends Component {
                 {this.state.viewingCast ? (<div>
                     VIEW CAST HERE <br />
                     {/* <Cast id={this.state.castID} cast={this.props.cast} crew={this.props.crew} closeView={this.movieView} newViewCast={this.newViewCast} /> */}
-                    
+
                     {this.newViewCast(this.state.castID)}
                 </div>)
                     : (
 
                         <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr  ', gridColumn: 'span 1' }}>
                             <LeftCastDetail>
-                                <button style={{float: 'right'}} className='fa fa-close' onClick={this.movieView}></button>
+
                                 <h2>{this.state.celeb.name}</h2>
                                 <img src={"https://image.tmdb.org/t/p/w185/" + this.state.celeb.profile_path} />
                             </LeftCastDetail>
                             <RightCastDetail>
+                                <button style={{ float: 'right' }} className='fa fa-close' onClick={this.movieView}></button>
                                 <div>
-                                    {this.state.celeb.birthday} <br/> <br/>
-                                    {this.state.celeb.biography} <br/> <br/>
-                                    {this.state.celeb.place_of_birth} <br/> <br/>
+                                    {this.state.celeb.birthday} <br /> <br />
+                                    {this.state.celeb.biography} <br /> <br />
+                                    {this.state.celeb.place_of_birth} <br /> <br />
                                     <a href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id}>IMDB LINK</a> <br />
                                 </div>
                             </RightCastDetail>
@@ -99,7 +100,7 @@ const ProductionList = styled.div`
 `;
 
 const RightCastDetail = styled.div`
-  background-color: yellow;
+    background-color: lightblue
 `;
 
 
