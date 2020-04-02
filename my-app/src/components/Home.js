@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 import { LeftDiv } from './StyledComponents';
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 
 class Home extends React.Component {
 
@@ -11,25 +13,25 @@ class Home extends React.Component {
     render() {
         let imgUrl = "https://images.unsplash.com/photo-1547756536-cde3673fa2e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1411&q=80";
         return (
-            <LeftDiv className="banner"
-                style={{
-                    backgroundImage: `url(${imgUrl})`,
-                    height: '100%',
-                    width: "1920px",
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center center',
-                    backgroundRepeat: 'no-repeat',
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr',
-                    gridTemplateRows: '1fr 1fr 1fr 1fr 1fr 1fr 1fr'
-                }}>
-                <div
-                    style={{
-                        backgroundColor: "var(--home-box-color)",
-                        padding: "2em",
-                        gridColumn: '4/6',
-                        gridRow: '4/5'
-                    }}
+            <div style={{
+                margin: '0',
+                height: '100%',
+                width: '100%',
+                backgroundImage: `url(${imgUrl})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center center',
+                backgroundRepeat: 'no-repeat',
+                position: 'absolute'
+            }}>
+                <Paper style={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    marginRight: 'auto',
+                    marginLeft: 'auto',
+                    marginTop: '200px',
+                    width: '30%'
+
+                }}
                 >
                     <h1>Movie Browser</h1>
                     <form>
@@ -37,28 +39,27 @@ class Home extends React.Component {
                         <input type="text" onChange={this.handleChange} />
                         <p>
                             <Link to='/MovieList'>
-                                <button>Show Matching Movies</button>
+                                <Button style={{ margin: '1em' }} variant="outlined" color="primary">Show All Movies</Button>
                             </Link>
                             <Link to='/MovieList'>
-                                <button>Show All Movies</button>
+                                <Button style={{ margin: '1em' }} variant="contained" color="primary">Show Matching Movies</Button>
                             </Link>
                         </p>
                     </form>
-                </div>
-                {/* <div style={{gridColumn:'1/9'}}></div> */}
-                <div
+                </Paper>
+                <Paper
                     style={{
                         backgroundColor: "var(--home-box-color)",
-                        height: '25',
-                        gridColumn: '1/9',
-                        gridRow: '7/8'
+                        height: '100px',
+                        width: '100%',
+                        marginTop: '23.4%'
                     }}>
                     <h3>Banner Credit</h3>
                     <p>@woolyart</p>
                     <a href='https://unsplash.com/photos/HAl6CKxM3xU'>train on railway at daytime</a>
-                </div>
+                </Paper>
 
-            </LeftDiv>
+            </div>
 
         );
     }

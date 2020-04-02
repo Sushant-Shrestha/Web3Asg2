@@ -101,8 +101,6 @@ class App extends React.Component {
         <About isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
         <Route render={({ location }) => {
           return (
-            <TransitionGroup component={null}>
-              <CSSTransition onEnter={this.animationStart} onEntered={this.animationComplete} timeout={{ enter: 200, exit: 100 }} key={location.key} classNames={'slide'}>
                 <Switch location={location}>
                   <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
@@ -111,8 +109,6 @@ class App extends React.Component {
                   <Route path='/cast' exact component={Cast} />
                   {/* <Route path='/about' exact component={About} /> */}
                 </Switch>
-              </CSSTransition>
-            </TransitionGroup>
           );
         }}
         />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import HeaderMenuNew from './HeaderMenuNew';
+import HeaderMenu from './HeaderMenu';
 import { Link } from 'react-router-dom';
 import { RightDiv } from './StyledComponents';
 import MovieMatches from './MovieMatches';
@@ -52,7 +52,6 @@ class MovieList extends Component {
     }
 
     async componentDidMount() {
-        console.log("hi");
         if (this.state.filteredMovies.length === 0) {
             let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
             this.setState({ movieList: movies, filteredMovies: movies });
@@ -223,7 +222,7 @@ class MovieList extends Component {
                 width: '100%', display: 'flex', flexFlow: 'column'
             }}>
 
-                <HeaderMenuNew openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
+                <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
 
                 <FavDiv className='subView' props={this.state.hideFav}>
                     <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView} />
@@ -244,16 +243,18 @@ class MovieList extends Component {
                                         )}
 
                                 </MovFilter>
+                                <MovList className='' props={this.state.hideFilter} style={{ height: '750px' }}>
                                     {!this.state.listAnim ? (
                                         <div>
                                             <MovieListAnimation />
                                             <p>Loading...</p>
                                         </div>
                                     ) : (
-                                        <MovieGrid movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} />
+                                            <MovieGrid movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} />
                                         )
 
                                     }
+                                </MovList>
                             </div>
                         )
                 }
