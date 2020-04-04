@@ -95,6 +95,11 @@ class App extends React.Component {
     this.setState({ modalIsOpen: false })
   }
 
+  redirectToLogin =() => {
+      window.location.href = 'http://localhost:8080/';
+      this.setState({ loggedIn: true});
+  }
+
   render() {
     return (
       <div className="App">
@@ -105,7 +110,12 @@ class App extends React.Component {
             <TransitionGroup component={null}>
               <CSSTransition onEnter={this.animationStart} onEntered={this.animationComplete} timeout={{ enter: 200, exit: 100 }} key={location.key} classNames={'slide'}>
                 <Switch location={location}>
-                  <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
+                  {!this.state.loggedIn ? 
+                  (<Route path='/' exact render={this.redirectToLogin} />)
+                  :
+                  (<Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />)}
+                  {/* <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} /> */}
+                  {/* <Route path='/' exact render={this.redirectToLogin} /> */}
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
                   <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
