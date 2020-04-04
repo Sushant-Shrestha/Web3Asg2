@@ -1,51 +1,36 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.27",
-    "@fortawesome/free-regular-svg-icons": "^5.12.1",
-    "@fortawesome/free-solid-svg-icons": "^5.12.1",
-    "@fortawesome/react-fontawesome": "^0.1.8",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.1",
-    "@testing-library/user-event": "^7.2.1",
-    "lodash": "^4.17.15",
-    "lottie-web": "^5.6.4",
-    "node-vibrant": "^3.1.5",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-lottie": "^1.2.3",
-    "react-modal": "^3.11.1",
-    "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.4.0",
-    "react-transition-group": "^4.3.0",
-    "styled-components": "^5.0.1"
-  },
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dataConnector.js",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node testApp.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client" 
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "express-ejs-layouts": "^2.5.0",
+    "express-flash": "0.0.2",
+    "express-session": "^1.17.0",
+    "flash": "^1.1.0",
+    "mongoose": "^5.9.7",
+    "node-router": "^0.1.6",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "router": "^1.3.5"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0"
+    "concurrently": "^5.1.0"
   }
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import MovieList from './components/MovieList';
 import Movie from './components/Movie';
@@ -19,7 +19,8 @@ class App extends React.Component {
       isFetching: false,
       animationComplete: true,
       favourites: [],
-      modalIsOpen: false
+      modalIsOpen: false,
+      loggedIn: false
     }
   }
 
@@ -29,7 +30,7 @@ class App extends React.Component {
     this.setState({ movieList: movies });
     if (localStorage.getItem("movieList") === null) {
       try {
-        let url = 'https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
+        let url = '/api/movies';
         if (this.state.movieList.length === 0) {
           const response = await fetch(url);
           const jsonData = await response.json();
@@ -48,7 +49,7 @@ class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('favList', JSON.stringify(this.state.favourites));
     })
-
+  
   }
 
   componentWillUnmount() {
