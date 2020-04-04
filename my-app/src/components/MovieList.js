@@ -13,6 +13,7 @@ import MovieDetails from './MovieDetails';
 import MovieGrid from './MovieGrid';
 import Backdrop from '@material-ui/core/Backdrop';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Paper from '@material-ui/core/Paper';
 
 class MovieList extends Component {
     constructor(props) {
@@ -262,10 +263,6 @@ class MovieList extends Component {
         )
     }
 }
-
-{/* <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} /> */ }
-// This is the old movie list
-
 const MovList = styled.div`
 `
 // position: absoulte;
@@ -275,12 +272,11 @@ const MovList = styled.div`
 // height: ${props => props.props ? "90%" : "79%"}
 // background-color: #a6a6a6;
 
-const MovFilter = styled.div`
+const MovFilter = styled(Paper)`
     margin: 0 2em;
     border-radius: 10px;
     grid-row: 1;
 
-    background-color: #48D1CC;
     
     display: ${props => props.props ? "none" : ""};
     grid-column: 1/2;
@@ -296,3 +292,6 @@ const FavDiv = styled.div`
 
 
 export default MovieList;
+
+{/* <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} /> */ }
+// This is the old movie list
