@@ -9,6 +9,8 @@ import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 import { faStar as faEmptyStar } from '@fortawesome/free-regular-svg-icons';
 import * as cloneDeep from 'lodash/cloneDeep';
 import DetailsAnimation from '../animation/DetailsAnimation';
+import { Close } from '@material-ui/icons';
+import Paper from '@material-ui/core/Paper';
 
 class MovieDetails extends React.Component {
     constructor(props) {
@@ -129,7 +131,7 @@ class MovieDetails extends React.Component {
                                 </LeftMovieDetails>
     
                                 <RightMovieDetails className='subView'>
-                                    <button className='fa fa-close' onClick={this.normalView} style={{ float: 'right' }}></button>
+                                    <button onClick={this.normalView} style={{ float: 'right' }}><Close/></button>
     
                                     <div>
                                         <BoxDetails> <b>Release date</b> {this.state.movie.release_date} <br />
@@ -258,5 +260,57 @@ const Column = styled.div`
     align-self: center;
     grid-column: span 1;
 `
+
+
+// Below has the paper style for all container divs in this page. Still would need more work from this, leaving just incase anyone wants it.
+// DELETE ANY OF THIS IF YOU DO NOT WANT TO USE IT
+
+// const MainDiv = styled.div`
+//     display: flex;
+//     height: 800px;
+// `;
+
+// const BoxDetails = styled(Paper)`
+// // background-color: white;
+// margin: 0px 50px 5px 50px;
+// padding: 20px;
+// `;
+// const LeftMovie = styled.div`
+//     padding: 3em;
+//     margin: 2em;
+//     dispay:grid;
+//     gridTemplateColumns: 1fr 2fr;
+//     gridColumn: span;
+// `;
+// const LeftMovieDetails = styled(Paper)`
+//     // background-color: #a6a6a6;
+//     width: 500px;
+// `;
+
+// const RightMovieDetails = styled(Paper)`
+// //    background-color: lightblue;
+//     width: 700px;
+// `;
+
+// const ProductionList = styled(Paper)`
+//     padding: 10px;
+//     justify-items: stretch;
+//     // grid-column: span 2;
+//     // background-color: #a6a6a6;
+//     overflow-y: scroll;
+// `;
+
+// const Column = styled.div`
+//     display: flex;
+//     align-items: center;
+//     justify-content: center;
+//     text-align: center;
+//     align-self: center;
+//     grid-column: span 1;
+// `
+
+
+
+
 
 export default MovieDetails;

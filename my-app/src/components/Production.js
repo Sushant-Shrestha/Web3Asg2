@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button';
 
 export default function Production(prop) {
    
@@ -26,7 +27,7 @@ export default function Production(prop) {
             <Column>
                 <div>
                     
-                    <button onClick={() => view(prop.person.id)}> View</button>
+                    <Button variant={'contained'} color={'primary'} onClick={() => view(prop.person.id)}> View</Button>
                 </div>
             </Column>
 
