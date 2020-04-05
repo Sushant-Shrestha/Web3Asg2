@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import Home from './components/Home';
 import MovieList from './components/MovieList';
 import Movie from './components/Movie';
@@ -19,7 +19,8 @@ class App extends React.Component {
       isFetching: false,
       animationComplete: true,
       favourites: [],
-      modalIsOpen: false
+      modalIsOpen: false,
+      loggedIn: false
     }
   }
 
@@ -29,7 +30,7 @@ class App extends React.Component {
     this.setState({ movieList: movies });
     if (localStorage.getItem("movieList") === null) {
       try {
-        let url = 'https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
+        let url = '/api/movies';
         if (this.state.movieList.length === 0) {
           const response = await fetch(url);
           const jsonData = await response.json();
@@ -48,7 +49,7 @@ class App extends React.Component {
     window.addEventListener('beforeunload', () => {
       localStorage.setItem('favList', JSON.stringify(this.state.favourites));
     })
-
+  
   }
 
   componentWillUnmount() {
@@ -94,6 +95,11 @@ class App extends React.Component {
     this.setState({ modalIsOpen: false })
   }
 
+  redirectToLogin =() => {
+      window.location.href = 'http://localhost:8080/';
+      this.setState({ loggedIn: true});
+  }
+
   render() {
     return (
       <div className="App">
@@ -102,7 +108,12 @@ class App extends React.Component {
         <Route render={({ location }) => {
           return (
                 <Switch location={location}>
-                  <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />
+                  {!this.state.loggedIn ? 
+                  (<Route path='/' exact render={this.redirectToLogin} />)
+                  :
+                  (<Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />)}
+                  {/* <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} /> */}
+                  {/* <Route path='/' exact render={this.redirectToLogin} /> */}
                   <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
                   <Route path='/movie' exact component={Movie} />
                   <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />

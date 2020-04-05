@@ -1,0 +1,135 @@
+const express = require('express');
+const MovieModel = require('../models/Movie.js');
+const BriefModel = require('../models/Brief.js');
+const LoginModel = require('../models/Login.js');
+const helper = require('./helpers.js');
+const passport = require('passport');
+
+const router = express.Router();
+
+//handle request for all movie
+router.get('/movies', helper.ensureAuthenticated, (req,resp) => { 
+    MovieModel.find( {}, (err, data) => {
+        if(err){
+            resp.json({ "message" : 'Unable to connect to movie'});
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+
+//handle single movie by id
+router.get('/movies/:id', helper.ensureAuthenticated, (req,resp) => { 
+    MovieModel.find( {id: req.params.id}, (err, data) => {
+        if(err || data.length === 0){
+            resp.json({ message : 'No movie found with ID of ' + req.params.id});
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+
+//handle brief version of all movies
+router.get('/brief', helper.ensureAuthenticated, (req,resp) => { 
+    BriefModel.find( {}, (err, data) => {
+        if(err){
+            resp.json({ "message" : 'Unable to connect to movie'});
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+//handle all movies with substring
+router.get('/find/title/:substring', helper.ensureAuthenticated, (req, resp) => {
+    MovieModel.find( {title : new RegExp(req.params.substring, 'i')}, (err, data) =>{
+        if(err || data.length === 0){
+            resp.json( { "message": 'No movie containing ' + req.params.substring + ' found.'})
+        } else {
+            resp.json(data);
+        }
+    });
+});
+
+
+//handle all movies with year in between
+router.get('/find/year/:start/:end' , helper.ensureAuthenticated, (req, resp) => {
+    MovieModel.find().where('release_date')
+        .gt(req.params.start)
+        .lt(req.params.end)
+        .exec( (err, data) => {
+            if(err || data.length === 0){
+                resp.json( {message: "No movies found"});
+            } else {
+                resp.json(data);
+            }
+        });
+});
+
+//handle all movies with rating in between
+router.get('/find/rating/:min/:max' , helper.ensureAuthenticated, (req, resp) => {
+    MovieModel.find().where('ratings.average')
+        .gt(req.params.min)
+        .lt(req.params.max)
+        .exec( (err, data) => {
+            if(err || data.length === 0){
+                resp.json( {message: "No movies found"});
+            } else {
+                resp.json(data);
+            }
+        });
+});
+
+//handle get all favorite
+router.get('/favorites', helper.ensureAuthenticated, (req,resp) => {
+    passport.deserializeUser((email, done) => {
+        LoginModel.findOne( { email: email}, (err, user) => {
+            if(err){
+                resp.json({ message: "Cannot connect to users profile"});
+            } else {
+                resp.json(user.favorites);
+            }
+        });
+    });
+});
+
+//add new movies to users fav list
+router.post('/favorites/:id', helper.ensureAuthenticated, (req,resp) => {
+    passport.deserializeUser((email, done) => {
+        LoginModel.findOne( { email: email}, (err, user) => {
+            if(err){
+                resp.json({ message: "Cannot connect to users profile"});
+            } else {
+                
+                //handle single movie by id
+                MovieModel.find( {id: req.params.id}, (err, data) => {
+                    if(err || data.length === 0){
+                        resp.json({ message : 'No movie found with ID of ' + req.params.id});
+                    } else {
+                        user.favorites.push(data);
+                    }
+                });
+                
+            }
+        });
+    });
+});
+
+//delete movie from users fav list
+router.delete('/favorites/:id', helper.ensureAuthenticated, (req,resp) => {
+    passport.deserializeUser((email, done) => {
+        LoginModel.findOne( { email: email}, (err, user) => {
+            if(err){
+                resp.json({ message: "Cannot connect to users profile"});
+            } else {
+                //delete the movie from array
+                var temp = {...user.favorites};
+                user.favorites = temp.filter( (m) => {return m.id != id});
+            }
+        });
+    });
+});
+
+module.exports = router;
