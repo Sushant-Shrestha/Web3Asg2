@@ -129,14 +129,14 @@ class Filter extends React.Component {
                         tempList.push(f);
                     }
                 });
-            } else if (this.state.selectedYearOption == 'after') {
+            } else if (this.state.selectedYearOption === 'after') {
 
                 list.forEach((f) => {
                     if (f.release_date.split('-')[0] >= this.afterDate.current.value) {
                         tempList.push(f);
                     }
                 });
-            } else if (this.state.selectedYearOption == 'yearBetween') {
+            } else if (this.state.selectedYearOption === 'yearBetween') {
 
                 list.forEach((f) => {
                     if ((f.release_date.split('-')[0] >= this.beforeDate.current.value) && (f.release_date.split('-')[0] <= this.afterDate.current.value)) {
@@ -150,7 +150,7 @@ class Filter extends React.Component {
             list = cloneDeep(tempList);
         }
 
-        if (this.state.selectedRatingOption != '') {
+        if (this.state.selectedRatingOption !== '') {
             let tempList = [];
 
             if (this.state.selectedRatingOption === 'below') {
