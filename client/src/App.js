@@ -96,7 +96,7 @@ class App extends React.Component {
   }
 
   redirectToLogin =() => {
-      window.location.href = 'http://localhost:8080/';
+      window.location.href = 'https://mysterious-reaches-90427.herokuapp.com/';
       this.setState({ loggedIn: true});
   }
 
