@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
-   resp.redirect('https://5e8b65c2245675e3bfb94ff0--web3asg2.netlify.com/home');
+   resp.redirect('https://web3asg2.netlify.com/home');
 });
 
 router.get('/login', (req, resp) => {
