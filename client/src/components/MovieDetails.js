@@ -38,7 +38,7 @@ class MovieDetails extends React.Component {
 
     async componentDidMount() {
         try {
-            let url = `http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=` + this.props.id;
+            let url = `/api/movies/` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
             Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
