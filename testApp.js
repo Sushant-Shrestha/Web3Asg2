@@ -5,6 +5,7 @@ const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const flash = require('express-flash');
+const cors = require('cors');
 
 // use .env file for configuration constants
 require('dotenv').config();
@@ -42,6 +43,8 @@ app.use(flash());
 
 //set up the passport authentication 
 require('./handler/auth.js');
+
+app.use(cors());
 
 //set up route handlers
 const openRoutes = require('./handler/openRouter.js');
