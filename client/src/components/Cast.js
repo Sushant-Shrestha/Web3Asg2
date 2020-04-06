@@ -98,11 +98,7 @@ const ProductionList = styled.div`
 `;
 
 const RightCastDetail = styled.div`
-<<<<<<< HEAD
-  background-color: yellow;
-=======
     background-color: lightblue
->>>>>>> ralp
 `;
 
 

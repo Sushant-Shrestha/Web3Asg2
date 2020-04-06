@@ -28,7 +28,7 @@ class App extends React.Component {
     this.setState({ isFetching: true });
     //let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
     //this.setState({ movieList: movies });
-    if (localStorage.getItem("movieList") === null) {
+    // if (localStorage.getItem("movieList") === null) {
       try {
         let url = '/api/movies';
         if (this.state.movieList.length === 0) {
@@ -40,15 +40,15 @@ class App extends React.Component {
       } catch (error) {
         console.error(error);
       }
-    }
+    // }
     this.setState({ isFetching: true });
 
-    let favs = JSON.parse(localStorage.getItem('favList') || '[]');
-    this.setState({ favourites: favs })
+    // let favs = JSON.parse(localStorage.getItem('favList') || '[]');
+    // this.setState({ favourites: favs })
 
-    window.addEventListener('beforeunload', () => {
-      localStorage.setItem('favList', JSON.stringify(this.state.favourites));
-    })
+    // window.addEventListener('beforeunload', () => {
+    //   localStorage.setItem('favList', JSON.stringify(this.state.favourites));
+    // })
   
   }
 
@@ -57,6 +57,7 @@ class App extends React.Component {
   }
 
   updateSearchTerm = (searchString) => {
+    this.fetchFavList;
     this.setState({ searchTerm: searchString });
   }
 
@@ -98,6 +99,19 @@ class App extends React.Component {
   redirectToLogin =() => {
       window.location.href = 'https://mysterious-reaches-90427.herokuapp.com/';
       this.setState({ loggedIn: true});
+  }
+
+  async fetchFavList(){
+    try {
+      let url = '/api/favorites';
+      if (this.state.movieList.length === 0) {
+        const response = await fetch(url);
+        const jsonData = await response.json();
+        this.setState({ favourites: jsonData });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   render() {

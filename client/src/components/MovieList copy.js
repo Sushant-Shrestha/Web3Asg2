@@ -57,12 +57,12 @@ class MovieList extends Component {
             this.setState({ movieList: movies, filteredMovies: movies });
             if (localStorage.getItem("movieList") === null) {
                 try {
-                    let url = 'https://www.randyconnolly.com/funwebdev/3rd/api/movie/movies-brief.php?id=ALL';
+                    let url = '/api/movies';
                     this.setState({ isFetching: true });
                     const response = await fetch(url);
                     const jsonData = await response.json();
                     this.setState({ filteredMovies: jsonData, isFetching: false })
-                    localStorage.setItem("movieList", JSON.stringify(jsonData));
+                    //localStorage.setItem("movieList", JSON.stringify(jsonData));
                     this.setState({ listAnim: true });
                 } catch (error) {
                     console.error(error);
