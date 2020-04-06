@@ -8,7 +8,7 @@ const router = express.Router();
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
    
-   resp.redirect('http://localhost:3000/home');
+   resp.redirect('/static');
 });
 
 router.get('/login', (req, resp) => {

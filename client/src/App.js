@@ -26,8 +26,8 @@ class App extends React.Component {
 
   async componentDidMount() {
     this.setState({ isFetching: true });
-    let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
-    this.setState({ movieList: movies });
+    //let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
+    //this.setState({ movieList: movies });
     if (localStorage.getItem("movieList") === null) {
       try {
         let url = '/api/movies';
@@ -35,7 +35,7 @@ class App extends React.Component {
           const response = await fetch(url);
           const jsonData = await response.json();
           this.setState({ movieList: jsonData, isFetching: false })
-          localStorage.setItem("movieList", JSON.stringify(jsonData));
+          //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
         }
       } catch (error) {
         console.error(error);

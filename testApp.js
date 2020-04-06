@@ -51,6 +51,8 @@ app.use('/', openRoutes);
 const movieRouter = require('./handler/movieRouter.js');
 app.use('/api', movieRouter);
 
+app.use('/static', express.static(path.join(__dirname, 'client/build')));
+
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.json({ error : err });
