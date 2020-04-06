@@ -50,8 +50,6 @@ app.use(cors());
 const openRoutes = require('./handler/openRouter.js');
 app.use('/', openRoutes);
 
-app.use(express.static(path.join(__dirname, 'client/build')));
-
 //movie handler
 const movieRouter = require('./handler/movieRouter.js');
 app.use('/api', movieRouter);
