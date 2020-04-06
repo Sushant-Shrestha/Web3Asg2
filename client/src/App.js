@@ -107,8 +107,6 @@ class App extends React.Component {
         <About isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
         <Route render={({ location }) => {
           return (
-            <TransitionGroup component={null}>
-              <CSSTransition onEnter={this.animationStart} onEntered={this.animationComplete} timeout={{ enter: 200, exit: 100 }} key={location.key} classNames={'slide'}>
                 <Switch location={location}>
                   {!this.state.loggedIn ? 
                   (<Route path='/' exact render={this.redirectToLogin} />)
@@ -122,8 +120,6 @@ class App extends React.Component {
                   <Route path='/cast' exact component={Cast} />
                   {/* <Route path='/about' exact component={About} /> */}
                 </Switch>
-              </CSSTransition>
-            </TransitionGroup>
           );
         }}
         />

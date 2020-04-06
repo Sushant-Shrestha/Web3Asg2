@@ -1,5 +1,6 @@
 import React from "react";
 import Modal from 'react-modal';
+import { Close } from '@material-ui/icons';
 
 const PortraitModal = (props) => {
 
@@ -7,6 +8,7 @@ const PortraitModal = (props) => {
         <Modal
             style={{
                 overlay: {
+                    zIndex: '999999'
                 },
 
                 content: {
@@ -17,7 +19,7 @@ const PortraitModal = (props) => {
             isOpen={props.isOpen}
         >
 
-            <button onClick={props.closeModal} className='fa fa-close' style={{ float: "right" }}></button>
+            <button onClick={props.closeModal} style={{ float: "right" }}><Close/></button>
             <div style={{
                 display: 'table',
                 margin: '0 auto'

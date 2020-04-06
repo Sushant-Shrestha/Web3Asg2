@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import HeaderMenuNew from './HeaderMenuNew';
+import HeaderMenu from './HeaderMenu';
+import { Link } from 'react-router-dom';
+import { RightDiv } from './StyledComponents';
 import MovieMatches from './MovieMatches';
 import styled from 'styled-components';
 import Filter from './Filter';
@@ -9,7 +11,8 @@ import MovieListAnimation from '../animation/MovieListAnimation';
 import Favourites from './Favourites';
 import MovieDetails from './MovieDetails';
 import MovieGrid from './MovieGrid';
-import Paper from '@material-ui/core/Paper';
+import Backdrop from '@material-ui/core/Backdrop';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 class MovieList extends Component {
     constructor(props) {
@@ -49,7 +52,6 @@ class MovieList extends Component {
     }
 
     async componentDidMount() {
-        console.log("hi");
         if (this.state.filteredMovies.length === 0) {
             let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
             this.setState({ movieList: movies, filteredMovies: movies });
@@ -214,35 +216,34 @@ class MovieList extends Component {
     // {/* backgroundColor: 'var(--background-general)',  */}
 
     render() {
-        let imgUrl = "https://images.unsplash.com/photo-1464802686167-b939a6910659?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1333&q=80";
+        let imgUrl = "https://images.unsplash.com/photo-1510827220565-c6a086ff31c8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80";
         return (
             <div className='' ref={this.componentRef} style={{
-                width: '100%', display: 'flex', flexFlow: 'column', backgroundColor: '#f7f7f7'
+                width: '100%', display: 'flex', flexFlow: 'column'
             }}>
 
-                <HeaderMenuNew openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
+                <HeaderMenu openModal={this.props.openModal} hideTheFilter={this.hideTheFilter} setFetching={this.setFetching} toggleFavouriteView={this.toggleFavouriteView} />
 
                 <FavDiv className='subView' props={this.state.hideFav}>
                     <Favourites favs={this.props.favs} removeFavourite={this.props.removeFavourite} toggleFavouriteView={this.toggleFavouriteView} />
                 </FavDiv>
 
-                <div>
+                {
+                    this.state.isViewing ? (
+                        // If viewing a movie show movie details
+                        <MovieDetails closeView={this.closeView} id={this.state.movieID} />
+                    ) : (
+                            // if not showing a movie show movie filter & movie
+                            <div>
+                                <MovFilter className='subView' props={this.state.hideFilter}>
+                                    {this.state.filterAnim ? (
+                                        <FilterAnimation />
+                                    ) : (
+                                            <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters} />
+                                        )}
 
-                    {
-                        this.state.isViewing ? (
-                            // If viewing a movie show movie details
-                            <MovieDetails closeView={this.closeView} id={this.state.movieID} />
-                        ) : (
-                                // if not showing a movie show movie filter & movie
-                                <div>
-                                    <MovFilter className='subView' props={this.state.hideFilter}>
-                                        {this.state.filterAnim ? (
-                                            <FilterAnimation />
-                                        ) : (
-                                                <Filter filteredList={this.state.filteredMovies} titleChange={this.titleChange} filterTrigger={this.filterTrigger} resetFilters={this.resetFilters} />
-                                            )}
-
-                                    </MovFilter>
+                                </MovFilter>
+                                <MovList className='' props={this.state.hideFilter} style={{ height: '750px' }}>
                                     {!this.state.listAnim ? (
                                         <div>
                                             <MovieListAnimation />
@@ -253,16 +254,19 @@ class MovieList extends Component {
                                         )
 
                                     }
-                                </div>
-                            )
-                    }
-                </div>
-
+                                </MovList>
+                            </div>
+                        )
+                }
 
             </div>
         )
     }
 }
+
+{/* <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} /> */ }
+// This is the old movie list
+
 const MovList = styled.div`
 `
 // position: absoulte;
@@ -272,26 +276,24 @@ const MovList = styled.div`
 // height: ${props => props.props ? "90%" : "79%"}
 // background-color: #a6a6a6;
 
-const MovFilter = styled(Paper)`
-    // margin: 0 2em;
-    // border-radius: 10px;
+const MovFilter = styled.div`
+    margin: 0 2em;
+    border-radius: 10px;
     grid-row: 1;
 
+    background-color: #48D1CC;
     
     display: ${props => props.props ? "none" : ""};
-    
     grid-column: 1/2;
     legend {
       text-color: red;  
     }
 `
 
-const FavDiv = styled(Paper)`
+const FavDiv = styled.div`
     display: ${props => props.props ? "none" : ""};
-    // background-image: url('https://ak4.picdn.net/shutterstock/videos/20618434/thumb/1.jpg?ip=x480');
+    background-image: url('https://ak4.picdn.net/shutterstock/videos/20618434/thumb/1.jpg?ip=x480');
 `
 
-export default MovieList;
 
-{/* <MovieMatches movies={this.state.filteredMovies} addToFavourites={this.props.addToFavourites} searchTerm={this.state.searchTerm} setViewing={this.setViewing} movieViewed={this.setViewedMovie} toggleTitleFilter={this.toggleTitleFilter} toggleYearFilter={this.toggleYearFilter} toggleRatingFilter={this.toggleRatingFilter} /> */ }
-// This is the old movie list
+export default MovieList;

@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
 
 
 export default function MovieRow(prop) {
@@ -34,8 +36,14 @@ export default function MovieRow(prop) {
             <Column style={{fontSize: 'large'}}>{props.ratings.average}</Column>
             <Column>
                 <div style={{ display: 'grid', gridGap: '10px' }}>
-                    <button className='clickable' onClick={() => view(props.title, props.id, props)}>View</button>
-                    <button className='clickable' onClick={(e) => clickHandler(e, props)} style={{color: '#DE67C3'}}>❤</button>
+                    <Button variant="contained" color="primary" onClick={() => view(props.title,props.id, props)}>
+                        View                  
+                    </Button>
+                    <IconButton aria-label="favourite" onClick={(e) => clickHandler(e, props)} style={{color: '#DE67C3'}}>
+                    ❤
+                    </IconButton>
+                    {/* <button className='clickable' onClick={() => view(props.title, props.id, props)}>View</button> */}
+                    {/* <button className='clickable' onClick={(e) => clickHandler(e, props)} style={{color: '#DE67C3'}}>❤</button> */}
                 </div>
             </Column>
         </li>
