@@ -7,7 +7,7 @@ const router = express.Router();
 
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
-   
+   resp.json({message: "PLZ WORK"});
    // resp.redirect('http://localhost:3000/home');
 });
 
