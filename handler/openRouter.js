@@ -23,7 +23,7 @@ router.get('/logout', (req, resp) => {
 
 router.post('/login', async (req, resp, next) => {
    //use passport authentication to see if valid login
-   passport.authenticate('localLogin', { successRedirect: '/static',
+   passport.authenticate('localLogin', { successRedirect: '/',
                                           failureRedirect: '/login',
                                           failureFlash: true})(req,resp, next);
 })

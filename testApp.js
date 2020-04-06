@@ -47,11 +47,11 @@ require('./handler/auth.js');
 const openRoutes = require('./handler/openRouter.js');
 app.use('/', openRoutes);
 
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 //movie handler
 const movieRouter = require('./handler/movieRouter.js');
 app.use('/api', movieRouter);
-
-app.use('/static', express.static(path.join(__dirname, 'client/build')));
 
 app.use(function(err, req, res, next) {
     res.status(err.status || 500);
