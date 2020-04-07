@@ -2,9 +2,13 @@ import React from "react";
 import Modal from 'react-modal';
 import { Close } from '@material-ui/icons';
 import Paper from '@material-ui/core/Paper';
-
+import Link from '@material-ui/core/Link';
 
 const About = (props) => {
+
+    const viewAPI = () => {
+        console.log("view API");
+    }
 
     return (
         <Modal
@@ -22,7 +26,7 @@ const About = (props) => {
             isOpen={props.isOpen}
         >
 
-            <button onClick={props.closeModal} style={{ float: "right" }}><Close/></button>
+            <button onClick={props.closeModal} style={{ float: "right" }}><Close /></button>
             <h1>About</h1>
             <ul className='aboutULOne'>
                 <Paper className='aboutLI'>
@@ -76,6 +80,42 @@ const About = (props) => {
                             <li>Keyframes: <a href="https://styled-components.com/docs/basics#animations">https://styled-components.com/docs/basics#animations</a></li>
                         </ul>
                     </div>
+                </Paper>
+
+                <Paper>
+                    <div className='aboutCard'>
+                        <h3>API</h3>
+                        <ul>
+                            <li>
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/movies">
+                                    Returns all movies in the data set
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/movies/${id}">
+                                    Return single movie specified by the movie id
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/brief">
+                                    Return a brief version of all the movies in the data set
+                                </Link>
+                            </li>
+                            <li>
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/find/title/${substring}">
+                                    Return all the movies whose title contains substring
+                                </Link>
+                            </li>
+
+                            <li>
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api//find/year/${start}${end}">
+                                    Return all the movies whose year is between two years
+                                </Link>
+                            </li>
+
+                        </ul>
+                    </div>
+
                 </Paper>
             </ul>
         </Modal>
