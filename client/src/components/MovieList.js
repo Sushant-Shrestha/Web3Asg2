@@ -54,7 +54,7 @@ class MovieList extends Component {
         //     this.setState({ movieList: movies, filteredMovies: movies });
         //     if (localStorage.getItem("movieList") === null) {
                 try {
-                    let url = '/api/movies';
+                    let url = 'https://mysterious-reaches-90427.herokuapp.com/api/movies';
                     this.setState({ isFetching: true });
                     const response = await fetch(url);
                     const jsonData = await response.json();
