@@ -34,7 +34,7 @@ class App extends React.Component {
         //if (this.state.movieList.length === 0) {
           const response = await fetch('/api/movies');
           const jsonData = await response.json();
-          this.setState({ movieList: jsonData, isFetching: false })
+          this.setState({ movieList: jsonData, isFetching: false });
           //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
         //}
       } catch (error) {
