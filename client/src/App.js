@@ -87,18 +87,17 @@ class App extends React.Component {
     if (isFound === undefined) {
       // copyFavourites.push(newFav);
       // this.setState({ favourites: copyFavourites });
-      fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
-        method: 'post',
-        headers: {
-          "Content-type": "application/json",
-          "Accept": "application/json",
-        },
-        body: {
-          id: this.newFav.id
-        }
-      });
-    }
-<<<<<<< HEAD
+    //   fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
+    //     method: 'post',
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       "Accept": "application/json",
+    //     },
+    //     body: {
+    //       id: this.newFav.id
+    //     }
+    //   });
+    // }
 
     axios({
       method: 'post',
@@ -113,8 +112,6 @@ class App extends React.Component {
         console.log(error);
       });
 
-=======
->>>>>>> ef0a5ce4b559d5a38cedf12c27b4f0ba262a1b57
     this.fetchFavList();
   }
 
