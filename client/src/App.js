@@ -32,7 +32,7 @@ class App extends React.Component {
       try {
         // let moviesUrl = '/api/movies';
         //if (this.state.movieList.length === 0) {
-          const response = await fetch('https://mysterious-reaches-90427.herokuapp.com/test');
+          const response = await fetch('https://mysterious-reaches-90427.herokuapp.com/api/movies');
           const jsonData = await response.json();
           console.log(jsonData);
           this.setState({ movieList: jsonData, isFetching: false });
