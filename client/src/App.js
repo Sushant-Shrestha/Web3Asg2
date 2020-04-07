@@ -31,28 +31,28 @@ class App extends React.Component {
     // if (localStorage.getItem("movieList") === null) {
       try {
         // let moviesUrl = '/api/movies';
-        if (this.state.movieList.length === 0) {
+        //if (this.state.movieList.length === 0) {
           const response = await fetch('/api/movies');
           const jsonData = await response.json();
           this.setState({ movieList: jsonData, isFetching: false })
           //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
-        }
+        //}
       } catch (error) {
         console.error(error);
       }
     // }
     this.setState({ isFetching: true });
 
-    try {
-      // let url = '/api/favorites';
-      if (this.state.movieList.length === 0) {
-        const resp =  await fetch('/api/favorites');
-        const json =  await resp.json();
-        this.setState({ favourites: json });
-      }
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   // let url = '/api/favorites';
+    //   if (this.state.movieList.length === 0) {
+    //     const resp =  await fetch('/api/favorites');
+    //     const json =  await resp.json();
+    //     this.setState({ favourites: json });
+    //   }
+    // } catch (error) {
+    //   console.error(error);
+    // }
 
     // let favs = JSON.parse(localStorage.getItem('favList') || '[]');
     // this.setState({ favourites: favs })
