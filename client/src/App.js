@@ -30,9 +30,9 @@ class App extends React.Component {
     //this.setState({ movieList: movies });
     // if (localStorage.getItem("movieList") === null) {
       try {
-        let url = '/api/movies';
+        // let moviesUrl = '/api/movies';
         if (this.state.movieList.length === 0) {
-          const response = await fetch(url);
+          const response = await fetch('/api/movies');
           const jsonData = await response.json();
           this.setState({ movieList: jsonData, isFetching: false })
           //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
@@ -44,11 +44,11 @@ class App extends React.Component {
     this.setState({ isFetching: true });
 
     try {
-      let url = '/api/favorites';
+      // let url = '/api/favorites';
       if (this.state.movieList.length === 0) {
-        const response =  await fetch(url);
-        const jsonData =  await response.json();
-        this.setState({ favourites: jsonData });
+        const resp =  await fetch('/api/favorites');
+        const json =  await resp.json();
+        this.setState({ favourites: json });
       }
     } catch (error) {
       console.error(error);
