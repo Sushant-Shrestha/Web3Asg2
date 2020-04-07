@@ -9,6 +9,7 @@ import Cast from './components/Cast';
 import About from './components/About';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import * as cloneDeep from 'lodash/cloneDeep';
+import axios from 'axios';
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -86,17 +87,31 @@ class App extends React.Component {
     if (isFound === undefined) {
       // copyFavourites.push(newFav);
       // this.setState({ favourites: copyFavourites });
-      fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
-        method: 'post',
-        headers: {
-          "Content-type": "application/json",
-          "Accept": "application/json",
-        },
-        body: {
-          id: this.newFav.id
-        }
+    //   fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
+    //     method: 'post',
+    //     headers: {
+    //       "Content-type": "application/json",
+    //       "Accept": "application/json",
+    //     },
+    //     body: {
+    //       id: this.newFav.id
+    //     }
+    //   });
+    // }
+
+    axios({
+      method: 'post',
+      url: "https://mysterious-reaches-90427.herokuapp.com/api/favourites",
+      data: {
+        id: this.newFav.id
+      }
+    })
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
       });
-    }
+
     this.fetchFavList();
   }
 
