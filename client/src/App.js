@@ -63,9 +63,9 @@ class App extends React.Component {
   
   }
 
-  componentWillUnmount() {
-    localStorage.setItem('favList', JSON.stringify(this.state.favourites));
-  }
+  // componentWillUnmount() {
+  //   localStorage.setItem('favList', JSON.stringify(this.state.favourites));
+  // }
 
   updateSearchTerm = (searchString) => {
     // this.fetchFavList;
