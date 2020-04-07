@@ -74,6 +74,12 @@ class App extends React.Component {
     this.setState({ searchTerm: searchString });
   }
 
+  fetchFavList = () => {
+    fetch('https://mysterious-reaches-90427.herokuapp.com/api/favorites')
+      .then(res => res.json())
+      .then(data => this.setState({ favourites: data}))
+  }
+
   addToFavourites = (movie) => {
     const copyFavourites = cloneDeep(this.state.favourites);
     const newFav = movie;
@@ -92,6 +98,7 @@ class App extends React.Component {
         }
       });
     }
+<<<<<<< HEAD
 
     axios({
       method: 'post',
@@ -106,6 +113,8 @@ class App extends React.Component {
         console.log(error);
       });
 
+=======
+>>>>>>> ef0a5ce4b559d5a38cedf12c27b4f0ba262a1b57
     this.fetchFavList();
   }
 

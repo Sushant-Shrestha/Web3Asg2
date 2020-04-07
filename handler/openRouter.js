@@ -9,13 +9,19 @@ const router = express.Router();
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
    
-    const token = jwt.sign(email, user.apikey, { expiresIn: '1h'});
-    resp.cookie('token', token);
+   const token = jwt.sign(req.user.email, req.user.apikey, { expiresIn: '1h'});
+   resp.cookie('token', token);
    resp.redirect('https://web3asg2.netlify.com/home');
 });
 
 router.get('/login', (req, resp) => {
-   resp.render('login', {message: req.flash('error')});
+   const token = req.cookies.token;
+   if(!token){
+      resp.render('login', {message: req.flash('error')});
+   } else {
+      passport.authenticate('localLogin')
+   }
+   
 });
 
 router.get('/logout', (req, resp) => {
