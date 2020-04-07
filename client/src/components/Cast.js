@@ -88,7 +88,6 @@ class Cast extends Component {
                                         <b>Born : </b>&nbsp;{this.state.celeb.birthday} in {this.state.celeb.place_of_birth} &nbsp;
 
                                         <Link
-                                            component="button"
                                             variant="subtitle2"
                                             color="primary"
                                             href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id}

@@ -169,8 +169,8 @@ class MovieDetails extends React.Component {
                                                     <Typography variant="subtitle1">
                                                         {this.state.movie.tagline}
                                                     </Typography>
-                                                    <Typography variant="h6">
-                                                        <Typography variant="h6" style={{ display: 'inline-block', color: "#696969" }}><b>Popularity: </b> </Typography> &nbsp;
+
+                                                    <Typography variant="h6" style={{ display: 'inline-block', color: "#696969" }}><b>Popularity: </b> </Typography> &nbsp;
                                                         {this.state.ratings.popularity} &nbsp;
 
                                                         <Typography variant="h6" style={{ display: 'inline-block', color: "#696969" }}> <b>| Average:</b> </Typography> &nbsp;
@@ -182,7 +182,7 @@ class MovieDetails extends React.Component {
                                                         <Typography variant="h6" style={{ display: 'inline-block', color: "#696969" }}> | </Typography> &nbsp;
 
                                                         <Typography variant="h6" style={{ display: 'inline-block' }}>  {this.state.starArray.map((s, i) => s)}</Typography>
-                                                    </Typography>
+
 
 
 
@@ -203,22 +203,15 @@ class MovieDetails extends React.Component {
                                                     {/* <a style={{ paddingRight: '1em' }} href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}> TMDB LINK</a> */}
 
                                                     {/* <a href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>IMDB LINK</a> <br /> */}
-                                                    <Link
-                                                        component="button"
-                                                        variant="subtitle1"
-                                                        color="primary"
-                                                        href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}
-                                                    >
+
+                                                    <Link variant="subtitle1" color="primary" href={"https://www.themoviedb.org/movie/" + this.state.movie.tmdb_id}>
                                                         TMDB
                                                     </Link> &nbsp;
-                                                    <Link
-                                                        component="button"
-                                                        variant="subtitle1"
-                                                        color="primary"
-                                                        href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}
-                                                    >
+
+                                                    <Link variant="subtitle1" color="primary" href={"https://www.imdb.com/title/" + this.state.movie.imdb_id}>
                                                         IMDB
-                                                    </Link> &nbsp; <br />
+                                                    </Link> &nbsp;
+                                                    
 
                                                     <Typography variant="subtitle2" style={{ display: 'inline-block', color: "#696969" }}><b> Release date: </b></Typography>  &nbsp;
 
@@ -307,13 +300,13 @@ class MovieDetails extends React.Component {
 
                                         </RightMovieDetails>
                                     </Grid>
-                                    <Grid item xs={11} style={{height: "20rem"}}>
+                                    <Grid item xs={11} style={{ height: "20rem" }}>
                                         <ProductionList className='subView'>
                                             <div>
                                                 <Typography variant="h5">
                                                     Production Cast
                                                 </Typography>
-                                                
+
                                                 {this.state.cast ? (<div> {this.state.cast.map((c, index) => {
                                                     return <Production key={index} setViewCast={this.setViewCast} person={c} closeView={this.closeView} updateViewCast={this.updateViewCast} />
                                                 })} </div>) : (<div>
