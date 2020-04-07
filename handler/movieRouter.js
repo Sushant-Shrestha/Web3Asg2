@@ -83,7 +83,7 @@ router.get('/find/rating/:min/:max' , helper.ensureAuthenticated, (req, resp) =>
 });
 
 //handle get all favorite
-router.get('/favorites', helper.ensureAuthenticated, (req,resp, next) => {
+router.get('/favorites', helper.ensureAuthenticated, (req,resp) => {
     resp.json(req.user.favorites);
 });
 
@@ -103,7 +103,7 @@ router.post('/favorites/:id', helper.ensureAuthenticated, (req,resp) => {
 router.delete('/favorites/:id', helper.ensureAuthenticated, (req,resp) => {    
     //delete the movie from array
     var temp = {...user.favorites};
-    user.favorites = temp.filter( (m) => {return m.id != id});        
+    user.favorites = temp.filter( (m) => {return m.id != req.params.id});        
     
 });
 
