@@ -114,6 +114,7 @@ class App extends React.Component {
 
     this.fetchFavList();
   }
+}
 
   removeFavourite = (movie) => {
     const copyFavourites = cloneDeep(this.state.favourites);
@@ -187,3 +188,4 @@ class App extends React.Component {
 }
 
 export default App;
+
