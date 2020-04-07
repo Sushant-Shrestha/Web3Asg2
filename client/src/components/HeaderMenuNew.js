@@ -78,6 +78,11 @@ export default function HeaderMenuNew(props) {
 
                         <Button color="inherit" onClick={props.openModal}>About</Button>
 
+                        <Button color='inherit' onClick={() => {
+                            window.location.href='http://localhost:8080/logout';
+                            this.setState({ loggedIn: false });
+                        }}>Logout</Button>
+
 
                     </Toolbar>
                 </AppBar>
