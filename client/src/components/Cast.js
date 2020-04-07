@@ -1,8 +1,15 @@
 import React, { Component } from 'react';
 import HeaderMenu from './HeaderMenu';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Production from './Production';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { Close } from '@material-ui/icons';
+import Link from '@material-ui/core/Link';
+
 
 class Cast extends Component {
     constructor(props) {
@@ -55,16 +62,55 @@ class Cast extends Component {
                                 <h2>{this.state.celeb.name}</h2>
                                 <img src={"https://image.tmdb.org/t/p/w185/" + this.state.celeb.profile_path} />
                             </LeftCastDetail>
+
                             <RightCastDetail>
-                                <button style={{ float: 'right' }} className='fa fa-close' onClick={this.movieView}></button>
+                                {/* <button style={{ float: 'right' }} className='fa fa-close' onClick={this.movieView}></button> */}
+
+                                <Button variant="contained" onClick={this.movieView} style={{
+                                    float: 'right',
+                                    margin: "10px 0 0 0 "
+                                }}>
+                                    <Close />
+                                </Button>
+
                                 <div>
-                                    {this.state.celeb.birthday} <br /> <br />
-                                    {this.state.celeb.biography} <br /> <br />
-                                    {this.state.celeb.place_of_birth} <br /> <br />
-                                    <a href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id}>IMDB LINK</a> <br />
+                                    <BioBox>
+                                        <Typography variant="subtitle1">
+                                            {this.state.celeb.biography} <br />
+
+
+                                        </Typography>
+                                    </BioBox>
+
+
+
+                                    <BioBox> <Typography variant="subtitle2">
+                                        <b>Born : </b>&nbsp;{this.state.celeb.birthday} in {this.state.celeb.place_of_birth} &nbsp;
+
+                                        <Link
+                                            variant="subtitle2"
+                                            color="primary"
+                                            href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id}
+                                        >
+                                            IMDB
+                                        </Link>
+                                    </Typography>
+
+
+                                        {/* <a href={"https://www.imdb.com/name/" + this.state.celeb.imdb_id} style={{
+                                            textDecoration: "none",
+                                            "&:hover": { textDecoration: "underline" }
+                                        }}>IMDB </a> <br /> */}
+                                    </BioBox>
+                                </div>
+                                <div>
+                                    {/* {this.state.celeb.birthday} <br /> <br /> */}
+                                    {/* {this.state.celeb.biography} <br /> <br /> */}
+                                    {/* {this.state.celeb.place_of_birth} <br /> <br /> */}
+
                                 </div>
                             </RightCastDetail>
-                            <ProductionList>
+                            {/* <ProductionList>
                                 <div className='subView'>
                                     <h2>Production</h2>
                                     <u>Cast</u> <br />
@@ -72,10 +118,11 @@ class Cast extends Component {
                                         return <Production key={index} setViewCast={this.newViewCast} person={c} closeView={this.closeView} />
                                     })}
                                 </div>
-                            </ProductionList>
+                            </ProductionList> */}
 
                         </div>
-                    )}
+                    )
+                }
             </div>
             // <div style={{backgroundColor: "cyan", height: "100px", width: "100px"}}>
             //     <HeaderMenu/>
@@ -87,18 +134,37 @@ class Cast extends Component {
     }
 }
 
-const LeftCastDetail = styled.div`
+const LeftCastDetail = styled(Paper)`
   background-color: var(--card-color);
 `;
 
-const ProductionList = styled.div`
+const ProductionList = styled(Paper)`
     background-color: var(--card-color);
     justify-items: stretch;
     grid-column: span 2;
 `;
 
-const RightCastDetail = styled.div`
-    background-color: lightblue
+const RightCastDetail = styled(Paper)`
+    // background-color: lightblue
+    height: 100%;
+`;
+
+const BioBox = styled(Paper)`
+ background-color: #e6eeff;
+ margin: 10px 70px 10px 30px;
+ padding: 10px;
+ height: 100%;
+ text-align: left;
+`;
+
+const BoxDetails = styled(Paper)`
+ background-color: #e6eeff;
+ margin: 0px 70px 5px 30px;
+ padding: 10px;
+ //border-style: solid;
+ height: 100%;
+ text-align: left;
+//  justify-content: left;
 `;
 
 

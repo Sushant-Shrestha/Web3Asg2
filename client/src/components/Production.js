@@ -13,8 +13,8 @@ export default function Production(prop) {
 
     return (
         <div className='movieRow' style={{
-            backgroundColor: 'var(--movie-row)',
-            padding: '10px',
+            backgroundColor: '#e6eeff',
+            padding: '  10px',
             margin: '10px',
             borderRadius: '10px',
             display: 'grid',
