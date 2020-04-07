@@ -97,7 +97,7 @@ class App extends React.Component {
         }
       });
     }
-    fetchFavList();
+    this.fetchFavList();
   }
 
   removeFavourite = (movie) => {
