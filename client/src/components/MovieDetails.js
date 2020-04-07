@@ -45,10 +45,10 @@ class MovieDetails extends React.Component {
             let url = `https://mysterious-reaches-90427.herokuapp.com/api/movies/` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
-            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
+            Vibrant.from("https://image.tmdb.org/t/p/w342" + jsonData[0].poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
             // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
-            this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, avg: jsonData.ratings.average, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
+            this.setState({ movie: jsonData[0], overview: jsonData[0].details.overview, ratings: jsonData[0].ratings, avg: jsonData[0].ratings.average, companies: jsonData[0].production.companies, countries: jsonData[0].production.countries, keywords: jsonData[0].details.keywords, genres: jsonData[0].details.genres, cast: jsonData[0].production.cast, crew: jsonData[0].production.crew });
 
 
             let tempArray = cloneDeep(this.state.starArray);
