@@ -29,18 +29,18 @@ class App extends React.Component {
     //let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
     //this.setState({ movieList: movies });
     // if (localStorage.getItem("movieList") === null) {
-      try {
-        // let moviesUrl = '/api/movies';
-        //if (this.state.movieList.length === 0) {
-          const response = await fetch('https://mysterious-reaches-90427.herokuapp.com/api/brief');
-          const jsonData = await response.json();
-          console.log(jsonData);
-          this.setState({ movieList: jsonData, isFetching: false });
-          //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
-        //}
-      } catch (error) {
-        console.error(error);
-      }
+    try {
+      // let moviesUrl = '/api/movies';
+      //if (this.state.movieList.length === 0) {
+      const response = await fetch('https://mysterious-reaches-90427.herokuapp.com/api/brief');
+      const jsonData = await response.json();
+      console.log(jsonData);
+      this.setState({ movieList: jsonData, isFetching: false });
+      //alocalStorage.setItem("movieList", JSON.stringify(jsonData));
+      //}
+    } catch (error) {
+      console.error(error);
+    }
     // }
     this.setState({ isFetching: true });
 
@@ -61,7 +61,7 @@ class App extends React.Component {
     // window.addEventListener('beforeunload', () => {
     //   localStorage.setItem('favList', JSON.stringify(this.state.favourites));
     // })
-  
+
   }
 
   // componentWillUnmount() {
@@ -78,9 +78,20 @@ class App extends React.Component {
     const newFav = movie;
     let isFound = this.state.favourites.find(fav => fav.id === newFav.id);
     if (isFound === undefined) {
-      copyFavourites.push(newFav)
-      this.setState({ favourites: copyFavourites })
+      // copyFavourites.push(newFav);
+      // this.setState({ favourites: copyFavourites });
+      fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
+        method: 'post',
+        headers: {
+          "Content-type": "application/json",
+          "Accept": "application/json",
+        },
+        body: {
+          id: this.newFav.id
+        }
+      });
     }
+    fetchFavList();
   }
 
   removeFavourite = (movie) => {
@@ -108,9 +119,9 @@ class App extends React.Component {
     this.setState({ modalIsOpen: false })
   }
 
-  redirectToLogin =() => {
-      window.location.href = 'https://mysterious-reaches-90427.herokuapp.com/';
-      this.setState({ loggedIn: true});
+  redirectToLogin = () => {
+    window.location.href = 'https://mysterious-reaches-90427.herokuapp.com/';
+    this.setState({ loggedIn: true });
   }
 
   // fetchFavList = () => {
@@ -129,23 +140,23 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        
+
         <About isOpen={this.state.modalIsOpen} closeModal={this.closeModal} />
         <Route render={({ location }) => {
           return (
-                <Switch location={location}>
-                  {!this.state.loggedIn ? 
-                  (<Route path='/' exact render={this.redirectToLogin} />)
-                  :
-                  (<Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />)}
-                  {/* <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} /> */}
-                  {/* <Route path='/' exact render={this.redirectToLogin} /> */}
-                  <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
-                  <Route path='/movie' exact component={Movie} />
-                  <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal}/>} />
-                  <Route path='/cast' exact component={Cast} />
-                  {/* <Route path='/about' exact component={About} /> */}
-                </Switch>
+            <Switch location={location}>
+              {!this.state.loggedIn ?
+                (<Route path='/' exact render={this.redirectToLogin} />)
+                :
+                (<Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} />)}
+              {/* <Route path='/' exact render={(props) => <Home searchHandler={this.updateSearchTerm} />} /> */}
+              {/* <Route path='/' exact render={this.redirectToLogin} /> */}
+              <Route path='/home' exact render={(props) => <Home searchHandler={this.updateSearchTerm} searchTerm={this.state.searchTerm} />} />
+              <Route path='/movie' exact component={Movie} />
+              <Route path='/movielist' exact render={(props) => <MovieList className='mainView' {...props} movies={this.state.movieList} addToFavourites={this.addToFavourites} removeFavourite={this.removeFavourite} searchTerm={this.state.searchTerm} anim={this.state.animationComplete} favs={this.state.favourites} openModal={this.openModal} />} />
+              <Route path='/cast' exact component={Cast} />
+              {/* <Route path='/about' exact component={About} /> */}
+            </Switch>
           );
         }}
         />
