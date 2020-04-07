@@ -73,6 +73,12 @@ class App extends React.Component {
     this.setState({ searchTerm: searchString });
   }
 
+  fetchFavList = () => {
+    fetch('https://mysterious-reaches-90427.herokuapp.com/api/favorites')
+      .then(res => res.json())
+      .then(data => this.setState({ favourites: data}))
+  }
+
   addToFavourites = (movie) => {
     const copyFavourites = cloneDeep(this.state.favourites);
     const newFav = movie;
