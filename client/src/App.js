@@ -101,7 +101,7 @@ class App extends React.Component {
 
     axios({
       method: 'post',
-      url: "https://mysterious-reaches-90427.herokuapp.com/api/favourites",
+      url: `https://mysterious-reaches-90427.herokuapp.com/api/favourites/${this.newFave.id}`,
       data: {
         id: this.newFav.id
       }

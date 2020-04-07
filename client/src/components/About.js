@@ -92,8 +92,8 @@ const About = (props) => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/movies/${id}">
-                                    Return single movie specified by the movie id
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/movies/2">
+                                    Return a single movie
                                 </Link>
                             </li>
                             <li>
@@ -102,13 +102,13 @@ const About = (props) => {
                                 </Link>
                             </li>
                             <li>
-                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/find/title/${substring}">
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/find/title/bill">
                                     Return all the movies whose title contains substring
                                 </Link>
                             </li>
 
                             <li>
-                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api//find/year/${start}${end}">
+                                <Link href="https://mysterious-reaches-90427.herokuapp.com/api/find/year/2008/2010">
                                     Return all the movies whose year is between two years
                                 </Link>
                             </li>
