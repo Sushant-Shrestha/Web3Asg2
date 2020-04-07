@@ -49,10 +49,10 @@ class MovieList extends Component {
     }
 
     async componentDidMount() {
-        if (this.state.filteredMovies.length === 0) {
-            let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
-            this.setState({ movieList: movies, filteredMovies: movies });
-            if (localStorage.getItem("movieList") === null) {
+        // if (this.state.filteredMovies.length === 0) {
+        //     let movies = JSON.parse(localStorage.getItem('movieList') || '[]');
+        //     this.setState({ movieList: movies, filteredMovies: movies });
+        //     if (localStorage.getItem("movieList") === null) {
                 try {
                     let url = '/api/movies';
                     this.setState({ isFetching: true });
@@ -64,8 +64,8 @@ class MovieList extends Component {
                 } catch (error) {
                     console.error(error);
                 }
-            }
-        }
+        //     }
+        // }
 
         this.setState({ filterAnim: false, listAnim: true });
         if (this.state.hidefav === true && this.props.favs.length > 0) {
