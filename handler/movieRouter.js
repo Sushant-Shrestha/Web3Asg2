@@ -88,11 +88,11 @@ router.get('/favorites', (req,resp) => {
 });
 
 //add new movies to users fav list
-router.post('/favorites/:id', (req,resp) => {
+router.post('/favorites', (req,resp) => {
     //handle single movie by id
-    MovieModel.find( {id: req.params.id}, (err, data) => {
+    MovieModel.find( {id: req.body.id}, (err, data) => {
         if(err || data.length === 0){
-            resp.json({ message : 'No movie found with ID of ' + req.params.id});
+            resp.json({ message : 'No movie found with ID of ' + req.body.id});
         } else {
             req.user.favorites.push(data);
         }
@@ -100,7 +100,7 @@ router.post('/favorites/:id', (req,resp) => {
 });
 
 //delete movie from users fav list
-router.delete('/favorites/:id', (req,resp) => {    
+router.delete('/favorites', (req,resp) => {    
     //delete the movie from array
     var temp = {...user.favorites};
     user.favorites = temp.filter( (m) => {return m.id != req.params.id});        
