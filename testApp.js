@@ -15,6 +15,7 @@ require('./dataConnector.js').connect();
 
 //create an express app
 const app = express();
+app.use(cors());
 
 // view engine setup
 app.use(expressLayouts);
@@ -44,7 +45,7 @@ app.use(flash());
 //set up the passport authentication 
 require('./handler/auth.js');
 
-app.use(cors());
+
 
 //set up route handlers
 const openRoutes = require('./handler/openRouter.js');
