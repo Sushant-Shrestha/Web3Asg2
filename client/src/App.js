@@ -43,6 +43,17 @@ class App extends React.Component {
     // }
     this.setState({ isFetching: true });
 
+    try {
+      let url = '/api/favorites';
+      if (this.state.movieList.length === 0) {
+        const response =  await fetch(url);
+        const jsonData =  await response.json();
+        this.setState({ favourites: jsonData });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     // let favs = JSON.parse(localStorage.getItem('favList') || '[]');
     // this.setState({ favourites: favs })
 
@@ -57,7 +68,7 @@ class App extends React.Component {
   }
 
   updateSearchTerm = (searchString) => {
-    this.fetchFavList;
+    // this.fetchFavList;
     this.setState({ searchTerm: searchString });
   }
 
@@ -101,18 +112,18 @@ class App extends React.Component {
       this.setState({ loggedIn: true});
   }
 
-  async fetchFavList(){
-    try {
-      let url = '/api/favorites';
-      if (this.state.movieList.length === 0) {
-        const response = await fetch(url);
-        const jsonData = await response.json();
-        this.setState({ favourites: jsonData });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  }
+  // fetchFavList = () => {
+  //   try {
+  //     let url = '/api/favorites';
+  //     if (this.state.movieList.length === 0) {
+  //       const response =  await fetch(url);
+  //       const jsonData =  await response.json();
+  //       this.setState({ favourites: jsonData });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // }
 
   render() {
     return (
