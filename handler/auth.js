@@ -1,6 +1,7 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const LoginModel = require('../models/Login.js');
+const jwt = require('jsonwebtoken');
 
 //maps the passport user+passwd fields to the names of fields in database
 const localOpt = {
@@ -25,6 +26,8 @@ const strategy = new LocalStrategy(localOpt, async(email, password, done) => {
       return done(null, false, { message: 'Incorrect password.' });
     }
 
+    // const token = jwt.sign(email, user.apikey, { expiresIn: '1h'});
+    // res.cookie('token', token, {})
     return done(null, user, {message: 'Logged in Successfully.'});
   });
 });
