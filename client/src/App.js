@@ -74,46 +74,20 @@ class App extends React.Component {
     this.setState({ searchTerm: searchString });
   }
 
-  fetchFavList = () => {
-    fetch('https://mysterious-reaches-90427.herokuapp.com/api/favorites')
-      .then(res => res.json())
-      .then(data => this.setState({ favourites: data}))
-  }
+  // fetchFavList = () => {
+  //   fetch('https://mysterious-reaches-90427.herokuapp.com/api/favorites')
+  //     .then(res => res.json())
+  //     .then(data => this.setState({ favourites: data}))
+  // }
 
   addToFavourites = (movie) => {
     const copyFavourites = cloneDeep(this.state.favourites);
     const newFav = movie;
     let isFound = this.state.favourites.find(fav => fav.id === newFav.id);
     if (isFound === undefined) {
-      // copyFavourites.push(newFav);
-      // this.setState({ favourites: copyFavourites });
-    //   fetch("https://mysterious-reaches-90427.herokuapp.com/api/favourites", {
-    //     method: 'post',
-    //     headers: {
-    //       "Content-type": "application/json",
-    //       "Accept": "application/json",
-    //     },
-    //     body: {
-    //       id: this.newFav.id
-    //     }
-    //   });
-    // }
-
-    axios({
-      method: 'post',
-      url: "https://mysterious-reaches-90427.herokuapp.com/api/favourites",
-      data: {
-        id: this.newFav.id
-      }
-    })
-      .then((response) => {
-        console.log(response);
-      }, (error) => {
-        console.log(error);
-      });
-
-    this.fetchFavList();
-  }
+      copyFavourites.push(newFav);
+      this.setState({ favourites: copyFavourites });
+    }
 }
 
   removeFavourite = (movie) => {

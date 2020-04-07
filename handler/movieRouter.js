@@ -103,7 +103,7 @@ router.post('/favorites', (req,resp) => {
 router.delete('/favorites', (req,resp) => {    
     //delete the movie from array
     var temp = {...user.favorites};
-    user.favorites = temp.filter( (m) => {return m.id != req.params.id});        
+    user.favorites = temp.filter( (m) => {return m.id != req.body.id});        
     
 });
 
