@@ -41,20 +41,11 @@ class MovieDetails extends React.Component {
     }
 
     async componentDidMount() {
-<<<<<<< HEAD
-        console.log("Movie Details");
-        console.log(this.props);
-=======
->>>>>>> 3c7eeae51933c84f4b199234a8f6443bd0463eef
         try {
             let url = `http://www.randyconnolly.com/funwebdev/3rd/api/movie/movies.php?id=` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
-<<<<<<< HEAD
             Vibrant.from("https://image.tmdb.org/t/p/w342" + jsonData[0].poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
-=======
-            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
->>>>>>> 3c7eeae51933c84f4b199234a8f6443bd0463eef
             // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
             this.setState({ movie: jsonData[0], overview: jsonData[0].details.overview, ratings: jsonData[0].ratings, avg: jsonData[0].ratings.average, companies: jsonData[0].production.companies, countries: jsonData[0].production.countries, keywords: jsonData[0].details.keywords, genres: jsonData[0].details.genres, cast: jsonData[0].production.cast, crew: jsonData[0].production.crew });
