@@ -45,8 +45,6 @@ app.use(flash());
 //set up the passport authentication 
 require('./handler/auth.js');
 
-//test route
-app.get('/test', (req,res) => res.json({"fuck": "you"}));
 
 //set up route handlers
 const openRoutes = require('./handler/openRouter.js');

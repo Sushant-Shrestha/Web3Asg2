@@ -2,11 +2,15 @@ const express = require('express');
 const passport = require('passport');
 const helper = require('./helpers.js');
 const path = require('path');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
 // Welcome Page
 router.get('/', helper.ensureAuthenticated, (req, resp) => {
+   
+    const token = jwt.sign(email, user.apikey, { expiresIn: '1h'});
+    resp.cookie('token', token);
    resp.redirect('https://web3asg2.netlify.com/home');
 });
 
