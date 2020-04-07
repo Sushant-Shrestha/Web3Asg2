@@ -9,7 +9,7 @@ export default function MovieRow(prop) {
     const clickHandler = (e, data) =>{
         prop.addToFavourites(data)
     }
-    let img = "https://image.tmdb.org/t/p/w92/" + props.poster;
+    let img = "https://image.tmdb.org/t/p/w92" + props.poster;
     // let year = props.release_date;
 
     const view = (title, id, movie) => {

@@ -45,7 +45,7 @@ class MovieDetails extends React.Component {
             let url = `https://mysterious-reaches-90427.herokuapp.com/api/movies/` + this.props.id;
             const response = await fetch(url);
             const jsonData = await response.json();
-            Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
+            Vibrant.from("https://image.tmdb.org/t/p/w342" + jsonData.poster).getPalette().then((palette) => this.setState({ colourImage: palette.Vibrant.hex, colourText: palette.Vibrant.titleTextColor }))
             // Vibrant.from("https://image.tmdb.org/t/p/w342/" + jsonData.poster).getPalette().then((palette) => this.setState({palette: palette.Vibrant}))
 
             this.setState({ movie: jsonData, overview: jsonData.details.overview, ratings: jsonData.ratings, avg: jsonData.ratings.average, companies: jsonData.production.companies, countries: jsonData.production.countries, keywords: jsonData.details.keywords, genres: jsonData.details.genres, cast: jsonData.production.cast, crew: jsonData.production.crew });
@@ -144,7 +144,7 @@ class MovieDetails extends React.Component {
                                                 </Typography>
 
                                             </Typography>
-                                            <img src={"https://image.tmdb.org/t/p/w342/" + this.state.movie.poster} onClick={this.openModal} />
+                                            <img src={"https://image.tmdb.org/t/p/w342" + this.state.movie.poster} onClick={this.openModal} />
 
                                         </div>
                                         </LeftMovieDetails>
