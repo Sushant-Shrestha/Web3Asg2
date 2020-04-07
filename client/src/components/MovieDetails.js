@@ -41,6 +41,7 @@ class MovieDetails extends React.Component {
     }
 
     async componentDidMount() {
+        console.log(this.props);
         try {
             let url = `https://mysterious-reaches-90427.herokuapp.com/api/movies/` + this.props.id;
             const response = await fetch(url);
